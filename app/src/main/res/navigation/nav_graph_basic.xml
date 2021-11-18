@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_basic"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mynailproject.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.example.mynailproject.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" />
+    <fragment
+        android:id="@+id/priceFragment"
+        android:name="com.example.mynailproject.PriceFragment"
+        android:label="fragment_price"
+        tools:layout="@layout/fragment_price" />
+    <fragment
+        android:id="@+id/staffFragment"
+        android:name="com.example.mynailproject.StaffFragment"
+        android:label="fragment_staff"
+        tools:layout="@layout/fragment_staff" />
+    <action
+        android:id="@+id/action_global_bookingFragment"
+        app:destination="@id/bookingFragment" />
+    <fragment
+        android:id="@+id/myOfficeFragment"
+        android:name="com.example.mynailproject.MyOfficeFragment"
+        android:label="fragment_my_office"
+        tools:layout="@layout/fragment_my_office" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mynailproject.signin.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.mynailproject.signin.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
+    <action
+        android:id="@+id/action_global_myOfficeFragment"
+        app:destination="@id/myOfficeFragment" />
+    <action
+        android:id="@+id/action_global_signupFragment"
+        app:destination="@id/signupFragment" />
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment" />
+    <fragment
+        android:id="@+id/infoSignupFragment"
+        android:name="com.example.mynailproject.signin.InfoSignupFragment"
+        android:label="fragment_info_signup"
+        tools:layout="@layout/fragment_info_signup" />
+    <action
+        android:id="@+id/action_global_infoSignupFragment"
+        app:destination="@id/infoSignupFragment" />
+</navigation>

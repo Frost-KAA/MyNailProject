@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Главная" />
+    <item
+        android:id="@+id/bookingFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_edit_calendar_24"
+        android:title="Календарь" />
+    <item
+        android:id="@+id/priceFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        android:title="Услуги" />
+    <item
+        android:id="@+id/staffFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="Персонал" />
+    <item
+        android:id="@+id/loginFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Кабинет" />
+</menu>

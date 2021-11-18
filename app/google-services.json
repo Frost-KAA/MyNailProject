@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "153722522022",
+    "project_id": "nailstudio-59fd8",
+    "storage_bucket": "nailstudio-59fd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153722522022:android:ad10ab8b6783857b262767",
+        "android_client_info": {
+          "package_name": "com.example.mynailproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153722522022-6ol370nrm3rifr6k2kocbdnh337dtg6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwBF5aS7jPo-B45rW5mniFQM9jP8tnvqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153722522022-6ol370nrm3rifr6k2kocbdnh337dtg6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
