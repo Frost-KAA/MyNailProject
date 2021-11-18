@@ -19,7 +19,11 @@
         android:id="@+id/priceFragment"
         android:name="com.example.mynailproject.PriceFragment"
         android:label="fragment_price"
-        tools:layout="@layout/fragment_price" />
+        tools:layout="@layout/fragment_price" >
+        <action
+            android:id="@+id/action_priceFragment_to_addServiceFragment"
+            app:destination="@id/addServiceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/staffFragment"
         android:name="com.example.mynailproject.StaffFragment"
@@ -60,4 +64,14 @@
     <action
         android:id="@+id/action_global_infoSignupFragment"
         app:destination="@id/infoSignupFragment" />
+    <fragment
+        android:id="@+id/addServiceFragment"
+        android:name="com.example.mynailproject.AddServiceFragment"
+        android:label="fragment_add_service"
+        tools:layout="@layout/fragment_add_service" >
+        <argument
+            android:name="number"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
