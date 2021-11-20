@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynailproject.adapter.PriceAdapter
 import com.example.mynailproject.database.ServiceType
 import com.example.mynailproject.database.User
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -46,9 +48,10 @@ class PriceFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
 
-        val add_b : Button = view.findViewById(R.id.add_button)
+        val add_b : FloatingActionButton = view.findViewById(R.id.add_button)
         add_b.setOnClickListener {
-            view.findNavController().navigate(R.id.action_global_myOfficeFragment)
+            val action = PriceFragmentDirections.actionPriceFragmentToAddServiceFragment(0, list[list.size-1].id!!)
+            view.findNavController().navigate(action)
         }
     }
 

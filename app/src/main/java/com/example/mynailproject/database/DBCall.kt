@@ -20,5 +20,13 @@ class DBCall {
         database.child("users").child(uid).setValue(user)
     }
 
+    fun addNewServType(id: Int, ser: ServiceType){
+        database.child("service_type").child("00"+id.toString()).setValue(ser)
+    }
+
+    fun deleteServType(id: Int){
+        database.child("service_type").child("00"+id.toString()).removeValue()
+    }
+
 
 }

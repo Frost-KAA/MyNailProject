@@ -73,5 +73,12 @@
             android:name="number"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="size"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
+    <action
+        android:id="@+id/action_global_priceFragment"
+        app:destination="@id/priceFragment" />
 </navigation>
