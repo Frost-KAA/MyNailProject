@@ -28,7 +28,11 @@
         android:id="@+id/staffFragment"
         android:name="com.example.mynailproject.StaffFragment"
         android:label="fragment_staff"
-        tools:layout="@layout/fragment_staff" />
+        tools:layout="@layout/fragment_staff" >
+        <action
+            android:id="@+id/action_staffFragment_to_addStaffFragment"
+            app:destination="@id/addStaffFragment" />
+    </fragment>
     <action
         android:id="@+id/action_global_bookingFragment"
         app:destination="@id/bookingFragment" />
@@ -81,4 +85,15 @@
     <action
         android:id="@+id/action_global_priceFragment"
         app:destination="@id/priceFragment" />
+    <fragment
+        android:id="@+id/addStaffFragment"
+        android:name="com.example.mynailproject.AddStaffFragment"
+        android:label="fragment_add_staff"
+        tools:layout="@layout/fragment_add_staff" >
+        <argument
+            android:name="uid"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+    </fragment>
 </navigation>

@@ -18,6 +18,10 @@ class DBCall {
 
     fun addNewUser(uid: String, user: User){
         database.child("users").child(uid).setValue(user)
+        if (user.role=="master"){
+            val m = Master(uid, null, null, user)
+            database.child("masters").child(uid).setValue(m)
+        }
     }
 
     fun addNewServType(id: Int, ser: ServiceType){
@@ -26,6 +30,15 @@ class DBCall {
 
     fun deleteServType(id: Int){
         database.child("service_type").child("00"+id.toString()).removeValue()
+    }
+
+    fun deleteMaster(uid: String){
+        database.child("masters").child(uid).removeValue()
+        database.child("user").child(uid).child("role").setValue("client")
+    }
+
+    fun editMaster(uid: String, master: Master){
+        database.child("masters").child(uid).setValue(master)
     }
 
 

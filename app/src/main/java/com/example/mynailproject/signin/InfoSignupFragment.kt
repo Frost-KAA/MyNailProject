@@ -61,7 +61,7 @@ class InfoSignupFragment : Fragment() {
             val phone_text = phone.text.toString()
             val email = current_user?.email
             val uid = current_user?.uid
-            val role: String = "client"
+            val role: String = "master"
 
             if (surname_text == "" || name_text == "" || pathronim_text == "" || phone_text == ""){
                 Toast.makeText(
