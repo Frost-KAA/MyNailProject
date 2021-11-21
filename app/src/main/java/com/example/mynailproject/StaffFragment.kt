@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynailproject.adapter.PriceAdapter
+import com.example.mynailproject.adapter.StaffAdapter
 import com.example.mynailproject.database.Master
 import com.example.mynailproject.database.ServiceType
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,16 +40,10 @@ class StaffFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //подключение адаптера
-       /* recycler =  view.findViewById(R.id.recycler_view)
-        recycler.adapter = this.context?.let { PriceAdapter(it, list) }
+        recycler =  view.findViewById(R.id.recycler_view_staff)
+        recycler.adapter = this.context?.let { StaffAdapter(it, list) }
         recycler.layoutManager = LinearLayoutManager(this.context)
-        recycler.setHasFixedSize(true)*/
-
-        val add_b : FloatingActionButton = view.findViewById(R.id.add_button_staff)
-        add_b.setOnClickListener {
-            val action = StaffFragmentDirections.actionStaffFragmentToAddStaffFragment(null)
-            view.findNavController().navigate(action)
-        }
+        recycler.setHasFixedSize(true)
     }
 
     fun addUserEventListener(userReference: DatabaseReference) {

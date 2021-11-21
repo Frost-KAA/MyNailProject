@@ -96,4 +96,7 @@
             app:nullable="true"
             android:defaultValue="null" />
     </fragment>
+    <action
+        android:id="@+id/action_global_staffFragment"
+        app:destination="@id/staffFragment" />
 </navigation>
