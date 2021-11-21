@@ -4,6 +4,7 @@ import android.R.attr.bitmap
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -63,10 +64,22 @@ class AddStaffFragment : Fragment() {
         info_view = view.findViewById(R.id.info_staff)
         photo_view = view.findViewById(R.id.photo_staff)
 
-        addUserEventListener(database, uid)
         val storageRef = storage.reference
-        val imagesRef = storageRef.child("master_photo/$uid")
+        val imagesRef = storageRef.child("master_photo/$uid.jpg")
+        addUserEventListener(database, uid)
 
+        val ONE_MEGABYTE: Long = 1024 * 1024 * 100
+        imagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+            Log.d("LOAD", "Success")
+            val bm: Bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+            photo_view.setImageBitmap(bm)
+            photo_view.visibility = VISIBLE
+        }.addOnFailureListener {
+            photo_view.visibility = INVISIBLE
+            Log.d("LOAD", "Fail")
+        }
+
+        // загрузка нового фото из галереи
         val load: Button = view.findViewById(R.id.button_photo_staff)
         load.setOnClickListener {
             val photoPickerIntent = Intent(Intent.ACTION_PICK)
@@ -74,9 +87,11 @@ class AddStaffFragment : Fragment() {
             startActivityForResult(photoPickerIntent, GALLERY_REQUEST)
         }
 
+        // сохранение загруженного фото
         val save: Button = view.findViewById(R.id.button_save_staff)
         save.setOnClickListener {
             val info = info_view.text.toString()
+            var photo_url : String? = null
             if (photo_view.visibility == VISIBLE){
                 photo_view.isDrawingCacheEnabled = true
                 photo_view.buildDrawingCache()
@@ -86,20 +101,23 @@ class AddStaffFragment : Fragment() {
                 val data = baos.toByteArray()
                 val uploadTask = imagesRef.putBytes(data)
                 uploadTask.addOnFailureListener {
-                    Toast.makeText(this.context, "Ошибка загрузки",
+                    Log.d("STAFF", "Error")
+                    Toast.makeText(this.context, "Ошибка",
                         Toast.LENGTH_SHORT).show()
                 }.addOnSuccessListener { taskSnapshot ->
+                    Log.d("STAFF", "Success")
                     Toast.makeText(this.context, "Фото загружено",
                         Toast.LENGTH_SHORT).show()
                 }
             }
-            val mas = Master(uid, info, null, user)
+            val mas = Master(uid, info, photo_url, user)
             val db_call = DBCall()
             db_call.editMaster(uid, mas)
             view.findNavController().navigate(R.id.action_global_staffFragment)
         }
     }
 
+    // отображение фото из галереи
     override fun onActivityResult(requestCode: Int, resultCode: Int, imageIntent: Intent?) {
         super.onActivityResult(requestCode, resultCode, imageIntent)
         when (requestCode) {
@@ -127,9 +145,7 @@ class AddStaffFragment : Fragment() {
                 val master = dataSnapshot.child("masters").child(uid).getValue<Master>()
                 info_view.text = master?.info
                 user = master?.user!!
-                if (master?.photo == null){
-                    photo_view.visibility = INVISIBLE
-                }
+                Log.d("STAFF", "STAFF")
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
