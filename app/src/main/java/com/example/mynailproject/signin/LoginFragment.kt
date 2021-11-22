@@ -104,7 +104,6 @@ class LoginFragment : Fragment() {
                     updateUI(null, true)
                 }
             }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

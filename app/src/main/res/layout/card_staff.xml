@@ -56,6 +56,7 @@
         android:minHeight="100dp">
 
         <LinearLayout
+            android:id="@+id/layout_staff_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

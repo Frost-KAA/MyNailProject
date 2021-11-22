@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout6"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signin.InfoSignupFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/hello"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Сведения о мастере"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/staff_info_surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
+        android:text="Фамилия"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/staff_info_photo" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/staff_info_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Имя"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/staff_info_surname" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/staff_info_pathronim"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Отчество"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/staff_info_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/staff_info_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:text="Информация"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/staff_info_pathronim" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/staff_info_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:text="89144039523"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/staff_info_info" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <ImageView
+        android:id="@+id/staff_info_photo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_baseline_person_24"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/hello" />
+
+    <Button
+        android:id="@+id/button_whatsapp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="WhatsApp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/staff_info_phone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

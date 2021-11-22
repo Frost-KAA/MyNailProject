@@ -19,7 +19,7 @@ class DBCall {
     fun addNewUser(uid: String, user: User){
         database.child("users").child(uid).setValue(user)
         if (user.role=="master"){
-            val m = Master(uid, null, null, user)
+            val m = Master(uid, null, user)
             database.child("masters").child(uid).setValue(m)
         }
     }

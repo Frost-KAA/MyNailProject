@@ -1,4 +1,4 @@
-package com.example.mynailproject
+package com.example.mynailproject.additional
 
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
+import com.example.mynailproject.additional.AddServiceFragmentArgs
+import com.example.mynailproject.R
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.ServiceType
-import com.example.mynailproject.database.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

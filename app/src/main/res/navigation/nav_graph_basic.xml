@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_staffFragment_to_addStaffFragment"
             app:destination="@id/addStaffFragment" />
+        <action
+            android:id="@+id/action_staffFragment_to_infoStaffFragment"
+            app:destination="@id/infoStaffFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_bookingFragment"
@@ -70,7 +73,7 @@
         app:destination="@id/infoSignupFragment" />
     <fragment
         android:id="@+id/addServiceFragment"
-        android:name="com.example.mynailproject.AddServiceFragment"
+        android:name="com.example.mynailproject.additional.AddServiceFragment"
         android:label="fragment_add_service"
         tools:layout="@layout/fragment_add_service" >
         <argument
@@ -87,7 +90,7 @@
         app:destination="@id/priceFragment" />
     <fragment
         android:id="@+id/addStaffFragment"
-        android:name="com.example.mynailproject.AddStaffFragment"
+        android:name="com.example.mynailproject.additional.AddStaffFragment"
         android:label="fragment_add_staff"
         tools:layout="@layout/fragment_add_staff" >
         <argument
@@ -99,4 +102,12 @@
     <action
         android:id="@+id/action_global_staffFragment"
         app:destination="@id/staffFragment" />
+    <fragment
+        android:id="@+id/infoStaffFragment"
+        android:name="com.example.mynailproject.additional.InfoStaffFragment"
+        android:label="fragment_info_staff" >
+        <argument
+            android:name="uid"
+            app:argType="string" />
+    </fragment>
 </navigation>

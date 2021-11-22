@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Выберете дату"
+        android:text="Выберите дату"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/shrine_pink_900"
         android:textSize="18sp"

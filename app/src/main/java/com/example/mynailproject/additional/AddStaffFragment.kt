@@ -1,6 +1,5 @@
-package com.example.mynailproject
+package com.example.mynailproject.additional
 
-import android.R.attr.bitmap
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
@@ -8,7 +7,6 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +19,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.mynailproject.additional.AddStaffFragmentArgs
+import com.example.mynailproject.R
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.Master
 import com.example.mynailproject.database.User
@@ -30,11 +30,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
-import java.io.IOException
 
 
 class AddStaffFragment : Fragment() {
@@ -70,13 +68,11 @@ class AddStaffFragment : Fragment() {
 
         val ONE_MEGABYTE: Long = 1024 * 1024 * 100
         imagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            Log.d("LOAD", "Success")
             val bm: Bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
             photo_view.setImageBitmap(bm)
             photo_view.visibility = VISIBLE
         }.addOnFailureListener {
             photo_view.visibility = INVISIBLE
-            Log.d("LOAD", "Fail")
         }
 
         // загрузка нового фото из галереи
@@ -91,7 +87,6 @@ class AddStaffFragment : Fragment() {
         val save: Button = view.findViewById(R.id.button_save_staff)
         save.setOnClickListener {
             val info = info_view.text.toString()
-            var photo_url : String? = null
             if (photo_view.visibility == VISIBLE){
                 photo_view.isDrawingCacheEnabled = true
                 photo_view.buildDrawingCache()
@@ -101,7 +96,6 @@ class AddStaffFragment : Fragment() {
                 val data = baos.toByteArray()
                 val uploadTask = imagesRef.putBytes(data)
                 uploadTask.addOnFailureListener {
-                    Log.d("STAFF", "Error")
                     Toast.makeText(this.context, "Ошибка",
                         Toast.LENGTH_SHORT).show()
                 }.addOnSuccessListener { taskSnapshot ->
@@ -110,7 +104,7 @@ class AddStaffFragment : Fragment() {
                         Toast.LENGTH_SHORT).show()
                 }
             }
-            val mas = Master(uid, info, photo_url, user)
+            val mas = Master(uid, info, user)
             val db_call = DBCall()
             db_call.editMaster(uid, mas)
             view.findNavController().navigate(R.id.action_global_staffFragment)
@@ -145,7 +139,6 @@ class AddStaffFragment : Fragment() {
                 val master = dataSnapshot.child("masters").child(uid).getValue<Master>()
                 info_view.text = master?.info
                 user = master?.user!!
-                Log.d("STAFF", "STAFF")
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

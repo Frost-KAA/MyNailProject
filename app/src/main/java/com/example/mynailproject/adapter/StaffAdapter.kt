@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -15,6 +16,7 @@ import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.example.mynailproject.PriceFragmentDirections
 import com.example.mynailproject.R
 import com.example.mynailproject.StaffFragmentDirections
+import com.example.mynailproject.additional.InfoStaffFragmentDirections
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.Master
 import com.example.mynailproject.database.ServiceType
@@ -59,6 +61,11 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
             val db_call = DBCall()
             db_call.deleteMaster(currentItem.uid!!)
         }
+
+        holder.lin_layout.setOnClickListener {
+            val action = StaffFragmentDirections.actionStaffFragmentToInfoStaffFragment(currentItem.uid!!)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
 
@@ -70,6 +77,7 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
         val edit: ImageView = itemView.findViewById(R.id.img_edit)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
+        val lin_layout: LinearLayout = itemView.findViewById(R.id.layout_staff_card)
     }
 
 
