@@ -6,5 +6,6 @@ import com.google.firebase.database.IgnoreExtraProperties
 data class ServiceType (
         val id: Int? = null,
         val name: String? = null,
-        val price: Int? = null
+        val price: Int? = null,
+        //val masters: HashMap<Uid>? = null
 )

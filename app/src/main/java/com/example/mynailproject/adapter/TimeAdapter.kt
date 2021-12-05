@@ -25,12 +25,12 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 
-class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerView.Adapter<PriceAdapter.ViewHolder>() {
+class TimeAdapter(val context: Context, val list: List<ServiceType>): RecyclerView.Adapter<TimeAdapter.ViewHolder>() {
 
     private val viewBinderHelper = ViewBinderHelper()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_price, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_time, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -58,12 +58,6 @@ class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerV
             val db_call = DBCall()
             db_call.deleteServType(currentItem.id!!)
         }
-
-        /*holder.name.setOnClickListener {
-            Log.d("CLICK", currentItem.id.toString())
-            val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString())
-            holder.itemView.findNavController().navigate(action)
-        }*/
 
         holder.main_layout.setOnClickListener {
             val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString())

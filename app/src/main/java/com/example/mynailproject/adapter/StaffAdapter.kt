@@ -15,6 +15,7 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.example.mynailproject.PriceFragmentDirections
 import com.example.mynailproject.R
+import com.example.mynailproject.Record.RecordStaffFragmentDirections
 import com.example.mynailproject.StaffFragmentDirections
 import com.example.mynailproject.additional.InfoStaffFragmentDirections
 import com.example.mynailproject.database.DBCall
@@ -62,8 +63,14 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
             db_call.deleteMaster(currentItem.uid!!)
         }
 
-        holder.lin_layout.setOnClickListener {
+        // Для "О салоне"
+        /*holder.lin_layout.setOnClickListener {
             val action = StaffFragmentDirections.actionStaffFragmentToInfoStaffFragment(currentItem.uid!!)
+            holder.itemView.findNavController().navigate(action)
+        }*/
+
+        holder.lin_layout.setOnClickListener {
+            val action = RecordStaffFragmentDirections.actionRecordStaffFragmentToRecordBookingFragment(currentItem.uid)
             holder.itemView.findNavController().navigate(action)
         }
     }

@@ -6,10 +6,10 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Главная" />
     <item
-        android:id="@+id/bookingFragment"
+        android:id="@+id/recordServiceFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_edit_calendar_24"
-        android:title="Календарь" />
+        android:title="Запись" />
     <item
         android:id="@+id/priceFragment"
         android:enabled="true"
