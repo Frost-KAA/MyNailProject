@@ -57,7 +57,7 @@
         android:minHeight="50dp">
 
         <TextView
-            android:id="@+id/serv_name"
+            android:id="@+id/hour_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

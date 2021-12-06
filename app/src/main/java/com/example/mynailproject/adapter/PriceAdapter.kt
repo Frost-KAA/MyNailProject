@@ -1,7 +1,6 @@
 package com.example.mynailproject.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
@@ -18,12 +16,6 @@ import com.example.mynailproject.R
 import com.example.mynailproject.Record.RecordServiceFragmentDirections
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.ServiceType
-import com.example.mynailproject.database.User
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 
 class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerView.Adapter<PriceAdapter.ViewHolder>() {
 
@@ -66,7 +58,7 @@ class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerV
         }*/
 
         holder.main_layout.setOnClickListener {
-            val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString())
+            val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString(), currentItem.time!!, currentItem.id!!)
             holder.itemView.findNavController().navigate(action)
         }
     }
@@ -74,7 +66,7 @@ class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerV
 
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.serv_name)
+        val name: TextView = itemView.findViewById(R.id.hour_name)
         val price: TextView = itemView.findViewById(R.id.serv_price)
         val edit: ImageView = itemView.findViewById(R.id.img_edit)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)

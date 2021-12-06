@@ -12,7 +12,6 @@ import com.example.mynailproject.R
 import com.example.mynailproject.adapter.StaffAdapter
 import com.example.mynailproject.additional.AddServiceFragmentArgs
 import com.example.mynailproject.database.Master
-import com.example.mynailproject.database.Uid
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -27,6 +26,8 @@ class RecordStaffFragment : Fragment() {
     lateinit var recycler : RecyclerView
     var list = ArrayList<Master>()
     var id: String? = null
+    var time: Int? = null
+    var serv: Int? = null
     private var database: DatabaseReference = Firebase.database.reference
 
 
@@ -36,6 +37,8 @@ class RecordStaffFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         getRecordId()
+        getRecordTime()
+        getRecordServ()
         addUserEventListener(database)
         return inflater.inflate(R.layout.fragment_record_staff, container, false)
     }
@@ -45,7 +48,7 @@ class RecordStaffFragment : Fragment() {
 
         //подключение адаптера
         recycler =  view.findViewById(R.id.recycler_view_staff)
-        recycler.adapter = this.context?.let { StaffAdapter(it, list) }
+        recycler.adapter = this.context?.let { StaffAdapter(it, list, time, serv) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
     }
@@ -58,14 +61,29 @@ class RecordStaffFragment : Fragment() {
         return id
     }
 
+    fun getRecordServ(): Int? {
+        val args = arguments?.let { RecordStaffFragmentArgs.fromBundle(it) }
+        if (!(args?.serv == null)){
+            serv = args.serv
+        }
+        return serv
+    }
+
+    fun getRecordTime(): Int? {
+        val args = arguments?.let { RecordStaffFragmentArgs.fromBundle(it) }
+        if (!(args?.time == null)){
+            time = args.time
+        }
+        return time
+    }
+
     fun addUserEventListener(userReference: DatabaseReference) {
         val userListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (list.size > 0) list.clear()
                 for (ds in id?.let { dataSnapshot.child("service_type").child(it).child("masters").children }!!){
                     val master_uid: String? = ds.getValue<String?>()
-                    Log.d("IIID", master_uid!!)
-                    val master = dataSnapshot.child("masters").child(master_uid).getValue<Master>()
+                    val master = dataSnapshot.child("masters").child(master_uid!!).getValue<Master>()
                     if (master != null) {
                         list.add(master)
                     }

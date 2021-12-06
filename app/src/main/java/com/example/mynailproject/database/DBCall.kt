@@ -1,6 +1,8 @@
 package com.example.mynailproject.database
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -34,12 +36,28 @@ class DBCall {
 
     fun deleteMaster(uid: String){
         database.child("masters").child(uid).removeValue()
-        database.child("user").child(uid).child("role").setValue("client")
+        database.child("users").child(uid).child("role").setValue("client")
     }
 
     fun editMaster(uid: String, master: Master){
         database.child("masters").child(uid).setValue(master)
     }
+
+    fun addRecord(uid: String, date:String, hour: Int, time:Int, serv: Int){
+        var i: Int = 0
+        val auth = Firebase.auth
+        val current_user = auth.currentUser
+
+        while(i < time){
+            database.child("masters").child(uid).child("date").child(date).child((hour+i).toString()).setValue("False")
+            i++
+        }
+
+        database.child("users").child(current_user?.uid!!).child("date").child(date).child("hour").setValue(hour)
+        database.child("users").child(current_user?.uid!!).child("date").child(date).child("master").setValue(uid)
+        database.child("users").child(current_user?.uid!!).child("date").child(date).child("service").setValue("00"+serv.toString())
+    }
+
 
 
 }

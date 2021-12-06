@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynailproject.R
 import com.example.mynailproject.adapter.TimeAdapter
+import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.ServiceType
+import com.example.mynailproject.database.Time
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -27,8 +29,10 @@ import java.util.*
 class RecordBookingFragment : Fragment() {
 
     lateinit var recycler : RecyclerView
-    val list = ArrayList<ServiceType>()
+    val list = ArrayList<Time>()
     var id:String? = null
+    var time: Int? = null
+    var serv: Int? = null
     lateinit var date: String
     private var database: DatabaseReference = Firebase.database.reference
 
@@ -38,6 +42,8 @@ class RecordBookingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         getRecordId()
+        getRecordTime()
+        getRecordServ()
         addUserEventListener(database)
         return inflater.inflate(R.layout.fragment_record_booking, container, false)
     }
@@ -48,23 +54,37 @@ class RecordBookingFragment : Fragment() {
         val calendar = view.findViewById<CalendarView>(R.id.calendarView)
         //Log.d("TIME", calendar.date.toInt().toString())
 
+        val ps = view.findViewById<TextView>(R.id.ps)
+        var text = "Длительность услуги "+time+" часа"
+        if (time == 1) text = "Длительность услуги "+time+" час"
+        ps.text = text
+
         val sdf = SimpleDateFormat("dd,MM,yyyy")
         date = sdf.format(Date(calendar.date))
         calendar.setOnDateChangeListener(CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
-            date = dayOfMonth.toString() + "," + (month + 1).toString() + "," + year.toString()
+            var d: String = dayOfMonth.toString()
+            if (d.length < 2) d = "0$d"
+            date = d + "," + (month + 1).toString() + "," + year.toString()
             addUserEventListener(database)
         })
 
         //подключение адаптера
         recycler =  view.findViewById(R.id.recycler_view)
-        recycler.adapter = this.context?.let { TimeAdapter(it, list) }
+        recycler.adapter = this.context?.let { TimeAdapter(it, list, time) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
 
         val save = view.findViewById<Button>(R.id.save)
         save.setOnClickListener {
-            val date_view = view.findViewById<TextView>(R.id.date)
-            date_view.text = "Дата записи: " + date
+            val color_id = (recycler.adapter as TimeAdapter).getColorPos()
+            if (color_id != -1){
+                val db_call = DBCall()
+                Log.d("COLOR", id.toString())
+                Log.d("COLOR", date.toString())
+                Log.d("COLOR", color_id.toString())
+                Log.d("COLOR", time.toString())
+                db_call.addRecord(id!!, date, color_id, time!!, serv!!)
+            }
         }
     }
 
@@ -76,16 +96,35 @@ class RecordBookingFragment : Fragment() {
         return id
     }
 
+    fun getRecordTime(): Int? {
+        val args = arguments?.let { RecordStaffFragmentArgs.fromBundle(it) }
+        if (!(args?.time == null)){
+            time = args.time
+        }
+        return time
+    }
+
+    fun getRecordServ(): Int? {
+        val args = arguments?.let { RecordStaffFragmentArgs.fromBundle(it) }
+        if (!(args?.serv == null)){
+            serv = args.serv
+        }
+        return serv
+    }
+
     fun addUserEventListener(userReference: DatabaseReference) {
         val userListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (list.size > 0) list.clear()
-                for (ds in dataSnapshot.child("masters").child(id!!).child(date).children){
+                for (ds in dataSnapshot.child("masters").child(id!!).child("date").child(date).children){
                     val is_free: String? = ds.getValue<String>()
-                    val time: String? = ds.key
+                    var free: Boolean?
+                    if (is_free == "True") free = true
+                    else free = false
+                    val hour: Int? = ds.key?.toInt()
+                    val time = Time(hour, free)
                     if (is_free != null) {
-                        //Log.d("SERV", serv.name.toString())
-                        //list.add()
+                        list.add(time)
                     }
                 }
                 recycler.adapter?.notifyDataSetChanged()

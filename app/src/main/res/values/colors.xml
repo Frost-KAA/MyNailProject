@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="shrine_pink_100">#FEDBD0</color>
+    <color name="shrine_pink_700">#A55B44</color>
+    <color name="shrine_pink_800">#795A51</color>
+    <color name="shrine_pink_200">#f0cac0</color>
     <color name="shrine_pink_900">#442C2E</color>
     <color name="shrine_pink_50">#FEEAE6</color>
 </resources>

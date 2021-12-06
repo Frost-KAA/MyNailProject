@@ -5,29 +5,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
-import com.example.mynailproject.PriceFragmentDirections
 import com.example.mynailproject.R
 import com.example.mynailproject.Record.RecordServiceFragmentDirections
-import com.example.mynailproject.database.DBCall
-import com.example.mynailproject.database.ServiceType
-import com.example.mynailproject.database.User
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
+import com.example.mynailproject.database.Time
 
-class TimeAdapter(val context: Context, val list: List<ServiceType>): RecyclerView.Adapter<TimeAdapter.ViewHolder>() {
+class TimeAdapter(val context: Context, val list: List<Time>, val time: Int?): RecyclerView.Adapter<TimeAdapter.ViewHolder>() {
 
     private val viewBinderHelper = ViewBinderHelper()
+    private var color_pos: Int = -1
+    private var color_id: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_time, parent, false)
@@ -41,40 +34,56 @@ class TimeAdapter(val context: Context, val list: List<ServiceType>): RecyclerVi
         val currentItem = list[position]
 
         viewBinderHelper.setOpenOnlyOne(true)
+        val str : String = currentItem.hour.toString()+":00"
+        holder.name.text = str
 
-        viewBinderHelper.bind(holder.layout, currentItem.name)
-        viewBinderHelper.closeLayout(currentItem.name)
-        holder.name.text = currentItem.name
-        holder.price.text = currentItem.price.toString()
-
-        // редактирование услуги
-        holder.edit.setOnClickListener {
-            val action = PriceFragmentDirections.actionPriceFragmentToAddServiceFragment(currentItem.id!!, list.size)
-            holder.itemView.findNavController().navigate(action)
+        if (!currentItem.free!!){
+            holder.main_layout.setBackgroundResource(R.color.shrine_pink_800)
         }
-
-        // удаление услуги
-        holder.delete.setOnClickListener {
-            val db_call = DBCall()
-            db_call.deleteServType(currentItem.id!!)
+        else{
+            if (color_pos == position){
+                color_id = currentItem.hour!!
+                holder.main_layout.setBackgroundResource(R.color.shrine_pink_200)
+            }
+            else{
+                holder.main_layout.setBackgroundResource(R.color.shrine_pink_50)
+            }
         }
 
         holder.main_layout.setOnClickListener {
-            val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString())
-            holder.itemView.findNavController().navigate(action)
+            if (currentItem.free) {
+                if (checkTime(position)) changeColorOnPosition(position)
+                else Toast.makeText(context, "Продолжительность свободного времени меньше времени услуги", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(context, "Это время уже занято", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
+    fun changeColorOnPosition(ex_num: Int){
+        color_pos = ex_num
+        notifyDataSetChanged()
+    }
 
+    fun getColorPos(): Int{
+        return color_id
+    }
+
+    fun checkTime(pos: Int): Boolean{
+        var i:Int = 0
+        while (i < time!!){
+            if (pos+i >= list.size || list[pos+i].free==false){
+                return false
+            }
+            i++
+        }
+        return true
+    }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.serv_name)
-        val price: TextView = itemView.findViewById(R.id.serv_price)
-        val edit: ImageView = itemView.findViewById(R.id.img_edit)
-        val delete: ImageView = itemView.findViewById(R.id.img_delete)
+        val name: TextView = itemView.findViewById(R.id.hour_name)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
         val main_layout: ConstraintLayout = itemView.findViewById(R.id.layout)
     }
-
-
 }

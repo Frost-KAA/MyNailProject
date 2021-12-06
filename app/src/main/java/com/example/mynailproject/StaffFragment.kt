@@ -41,7 +41,7 @@ class StaffFragment : Fragment() {
 
         //подключение адаптера
         recycler =  view.findViewById(R.id.recycler_view_staff)
-        recycler.adapter = this.context?.let { StaffAdapter(it, list) }
+        recycler.adapter = this.context?.let { StaffAdapter(it, list,0, 0) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
     }

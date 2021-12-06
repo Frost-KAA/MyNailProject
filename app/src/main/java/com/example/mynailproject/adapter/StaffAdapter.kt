@@ -28,7 +28,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 
-class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
+class StaffAdapter(val context: Context, val list: List<Master>, val time: Int?, val serv: Int?): RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
 
     private val viewBinderHelper = ViewBinderHelper()
 
@@ -70,7 +70,7 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
         }*/
 
         holder.lin_layout.setOnClickListener {
-            val action = RecordStaffFragmentDirections.actionRecordStaffFragmentToRecordBookingFragment(currentItem.uid)
+            val action = RecordStaffFragmentDirections.actionRecordStaffFragmentToRecordBookingFragment(currentItem.uid, time!!, serv!!)
             holder.itemView.findNavController().navigate(action)
         }
     }

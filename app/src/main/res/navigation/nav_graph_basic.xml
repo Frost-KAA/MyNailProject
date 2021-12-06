@@ -127,6 +127,12 @@
         <action
             android:id="@+id/action_recordStaffFragment_to_recordBookingFragment"
             app:destination="@id/recordBookingFragment" />
+        <argument
+            android:name="time"
+            app:argType="integer" />
+        <argument
+            android:name="serv"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/recordBookingFragment"
@@ -136,5 +142,11 @@
             android:name="id"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="time"
+            app:argType="integer" />
+        <argument
+            android:name="serv"
+            app:argType="integer" />
     </fragment>
 </navigation>

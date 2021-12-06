@@ -7,5 +7,5 @@ data class ServiceType (
         val id: Int? = null,
         val name: String? = null,
         val price: Int? = null,
-        //val masters: HashMap<Uid>? = null
+        val time: Int? = null
 )
