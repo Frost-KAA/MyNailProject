@@ -146,6 +146,7 @@ class LoginFragment : Fragment() {
                 Toast.LENGTH_SHORT).show()
         }
         else{
+            DBCall.CurrentRole.setRole()
             Log.d("Update", user.isEmailVerified().toString())
             // Верификация почты
             //if (user.isEmailVerified()){

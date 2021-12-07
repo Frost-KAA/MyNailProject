@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Главная"
 
         val text1 = view.findViewById<TextView>(R.id.hello_name)
         text1.text = "Рады видеть вас!"

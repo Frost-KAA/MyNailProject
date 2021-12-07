@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mynailproject.Record.RecordStaffFragmentDirections
 import com.example.mynailproject.adapter.DateAdapter
 import com.example.mynailproject.adapter.StaffAdapter
 import com.example.mynailproject.database.*
@@ -78,6 +79,12 @@ class MyOfficeFragment : Fragment() {
         val work: Button = view.findViewById(R.id.button_to_work)
         work.setOnClickListener {
             view.findNavController().navigate(R.id.action_myOfficeFragment_to_bookingFragment)
+        }
+
+        val see_work: Button = view.findViewById(R.id.button_work)
+        see_work.setOnClickListener{
+            val action =MyOfficeFragmentDirections.actionMyOfficeFragmentToRecordBookingFragment(current_user?.uid, 0, 0)
+            view.findNavController().navigate(action)
         }
 
         //подключение адаптера

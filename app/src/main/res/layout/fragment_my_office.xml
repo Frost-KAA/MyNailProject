@@ -11,7 +11,7 @@
         android:id="@+id/button_exit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:text="Выйти"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
@@ -69,7 +69,7 @@
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="Текущие записи"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -107,7 +107,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_now"
         android:layout_width="0dp"
-        android:layout_height="199dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/ps"
@@ -141,6 +141,16 @@
         android:layout_marginBottom="10dp"
         android:text="Ввести время работы"
         app:layout_constraintBottom_toTopOf="@+id/button_exit"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+    <Button
+        android:id="@+id/button_work"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Посмотреть время работы"
+        app:layout_constraintBottom_toTopOf="@+id/button_to_work"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
 

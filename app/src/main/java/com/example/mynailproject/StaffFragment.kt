@@ -13,7 +13,9 @@ import com.example.mynailproject.adapter.PriceAdapter
 import com.example.mynailproject.adapter.StaffAdapter
 import com.example.mynailproject.database.Master
 import com.example.mynailproject.database.ServiceType
+import com.example.mynailproject.database.User
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -26,6 +28,9 @@ class StaffFragment : Fragment() {
 
     lateinit var recycler : RecyclerView
     val list = ArrayList<Master>()
+    var current_role: String? = null
+    val auth = Firebase.auth
+    val current_user = auth.currentUser
     private var database: DatabaseReference = Firebase.database.reference
 
     override fun onCreateView(
@@ -38,10 +43,12 @@ class StaffFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Наши специалисты"
 
         //подключение адаптера
         recycler =  view.findViewById(R.id.recycler_view_staff)
-        recycler.adapter = this.context?.let { StaffAdapter(it, list,0, 0) }
+        recycler.adapter = this.context?.let { StaffAdapter(it, list) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
     }

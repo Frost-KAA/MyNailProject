@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.mynailproject.database.DBCall
 
 
 class MainFragment : Fragment() {
@@ -23,6 +24,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        DBCall.CurrentRole.setRole()
         val bottom = view.findViewById<Button>(R.id.button_service)
         bottom.setOnClickListener {
             view.findNavController().navigate(R.id.action_mainFragment_to_basicActivity)

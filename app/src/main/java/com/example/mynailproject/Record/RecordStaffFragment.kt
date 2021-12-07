@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynailproject.R
+import com.example.mynailproject.adapter.RecordStaffAdapter
 import com.example.mynailproject.adapter.StaffAdapter
 import com.example.mynailproject.additional.AddServiceFragmentArgs
 import com.example.mynailproject.database.Master
@@ -48,7 +49,7 @@ class RecordStaffFragment : Fragment() {
 
         //подключение адаптера
         recycler =  view.findViewById(R.id.recycler_view_staff)
-        recycler.adapter = this.context?.let { StaffAdapter(it, list, time, serv) }
+        recycler.adapter = this.context?.let { RecordStaffAdapter(it, list, time, serv) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
     }

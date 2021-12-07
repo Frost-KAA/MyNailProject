@@ -8,7 +8,7 @@
         android:id="@+id/MainFragment"
         android:name="com.example.mynailproject.MainFragment"
         android:label="fragment_enter"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_basicActivity"
             app:destination="@id/basicActivity" />
@@ -17,6 +17,25 @@
         android:id="@+id/basicActivity"
         android:name="com.example.mynailproject.BasicActivity"
         android:label="activity_basic"
-        tools:layout="@layout/activity_basic" >
-    </activity>
+        tools:layout="@layout/activity_basic"></activity>
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.mynailproject.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.mynailproject.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
 </navigation>

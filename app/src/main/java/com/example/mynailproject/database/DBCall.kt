@@ -16,9 +16,44 @@ import java.util.concurrent.FutureTask
 
 class DBCall {
 
+
+
     private var database: DatabaseReference = Firebase.database.reference
     val auth = Firebase.auth
     val current_user = auth.currentUser
+
+    object CurrentRole{
+        private var current_role : String? = null
+
+        fun setRole(){
+            val t = Thread {
+                val auth = Firebase.auth
+                val current_user = auth.currentUser
+                val database: DatabaseReference = Firebase.database.reference
+                val userListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        current_role = dataSnapshot.child("users").child(current_user?.uid!!)
+                            .getValue<User>()?.role
+                        Log.d("CURR0", current_role.toString())
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        current_role = null
+                        Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                    }
+                }
+                database.addValueEventListener(userListener)
+            }
+            t.start()
+            t.join()
+            Log.d("CURR", current_role.toString())
+
+        }
+
+        fun getRole(): String?{
+            return current_role
+        }
+    }
 
     fun addNewUser(uid: String, user: User){
         database.child("users").child(uid).setValue(user)
@@ -38,7 +73,7 @@ class DBCall {
 
     fun deleteMaster(uid: String){
         database.child("masters").child(uid).removeValue()
-        database.child("users").child(uid).child("role").setValue("client")
+        //database.child("users").child(uid).child("role").setValue("client")
     }
 
     fun editMaster(uid: String, master: Master){
@@ -72,7 +107,29 @@ class DBCall {
             date += 24*60*60*1000
 
         }
+    }
 
+    fun getRole(): String?{
+        var current_role: String? = null
+        val t = Thread {
+            val userListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    current_role = dataSnapshot.child("users").child(current_user?.uid!!)
+                        .getValue<User>()?.role
+                    Log.d("CURR0", current_role.toString())
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    current_role = null
+                    Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                }
+            }
+            database.addValueEventListener(userListener)
+        }
+        t.start()
+        t.join()
+        Log.d("CURR", current_role.toString())
+        return current_role
     }
 
 

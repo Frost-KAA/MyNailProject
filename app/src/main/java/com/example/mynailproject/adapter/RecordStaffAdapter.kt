@@ -1,8 +1,6 @@
 package com.example.mynailproject.adapter
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,22 +23,15 @@ import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.Master
 import com.example.mynailproject.database.ServiceType
 import com.example.mynailproject.database.User
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 
-class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
+class RecordStaffAdapter(val context: Context, val list: List<Master>, val time: Int?, val serv: Int?): RecyclerView.Adapter<RecordStaffAdapter.ViewHolder>() {
 
     private val viewBinderHelper = ViewBinderHelper()
-    private var database: DatabaseReference = Firebase.database.reference
-    val storage = Firebase.storage
-    var expanded : Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_staff, parent, false)
@@ -52,46 +43,25 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val currentItem = list[position]
-        val role = DBCall.CurrentRole.getRole()
-        if (role == null || role == "client"){
-            holder.delete.visibility = View.GONE
-        }
 
         viewBinderHelper.setOpenOnlyOne(true)
+
         viewBinderHelper.bind(holder.layout, currentItem.user?.name)
         viewBinderHelper.closeLayout(currentItem.user?.name)
-
         holder.name.text = currentItem.user?.name
         holder.pathronim.text = currentItem.user?.pathronim
         holder.surname.text = currentItem.user?.surname
-        holder.info.text = currentItem.info
 
-        val storageRef = storage.reference
-        val imagesRef = storageRef.child("master_photo/${currentItem.uid}.jpg")
-        val ONE_MEGABYTE: Long = 1024 * 1024 * 100
-        imagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            val bm: Bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
-            holder.image.setImageBitmap(bm)
-        }.addOnFailureListener {
-            Log.d("FAIL", it.toString())
-        }
-
-
-        if (expanded == position) holder.detail_layout.visibility = View.VISIBLE
-        else holder.detail_layout.visibility = View.GONE
-
-        holder.lin_layout.setOnClickListener {
-            if (expanded == position) expanded = -1
-            else expanded = position
-            notifyDataSetChanged()
+        // редактирование услуги
+        holder.edit.setOnClickListener {
+            val action = StaffFragmentDirections.actionStaffFragmentToAddStaffFragment(currentItem.uid)
+            holder.itemView.findNavController().navigate(action)
         }
 
         // удаление услуги
         holder.delete.setOnClickListener {
-            expanded = -1
             val db_call = DBCall()
             db_call.deleteMaster(currentItem.uid!!)
-            notifyDataSetChanged()
         }
 
         // Для "О салоне"
@@ -100,6 +70,10 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
             holder.itemView.findNavController().navigate(action)
         }*/
 
+        holder.lin_layout.setOnClickListener {
+            val action = RecordStaffFragmentDirections.actionRecordStaffFragmentToRecordBookingFragment(currentItem.uid, time!!, serv!!)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
 
@@ -108,12 +82,10 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
         val name: TextView = itemView.findViewById(R.id.staff_name)
         val pathronim: TextView = itemView.findViewById(R.id.staff_pathronim)
         val surname: TextView = itemView.findViewById(R.id.staff_surname)
-        val image: ImageView = itemView.findViewById(R.id.image_staff)
+        val edit: ImageView = itemView.findViewById(R.id.img_edit)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
         val lin_layout: LinearLayout = itemView.findViewById(R.id.layout_staff_card)
-        val detail_layout: ConstraintLayout = itemView.findViewById(R.id.layout_details)
-        val info: TextView = itemView.findViewById(R.id.details_info)
     }
 
 
