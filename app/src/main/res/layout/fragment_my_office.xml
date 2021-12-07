@@ -38,12 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         android:gravity="left|center_vertical"
         android:text="Фамилия"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/shrine_pink_900"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/button_edit_user"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,24 +54,46 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
         android:gravity="left|center_vertical"
         android:text="Имя"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/shrine_pink_900"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/button_edit_user"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/u_surname" />
 
-    <TextView
-        android:id="@+id/text_info"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ps"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/button_exit"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Текущие записи"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/u_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ps2"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="История записей"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_now" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -81,12 +104,42 @@
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_now"
+        android:layout_width="0dp"
+        android:layout_height="199dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/ps"
+        tools:listitem="@layout/card_date" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_history"
+        android:layout_width="0dp"
+        android:layout_height="108dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/ps2"
+        tools:listitem="@layout/card_date" />
+
+    <ImageButton
         android:id="@+id/button_edit_user"
+        android:layout_width="52dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/shrine_pink_900" />
+
+    <Button
+        android:id="@+id/button_to_work"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Редактировать"
+        android:layout_marginBottom="10dp"
+        android:text="Ввести время работы"
         app:layout_constraintBottom_toTopOf="@+id/button_exit"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />

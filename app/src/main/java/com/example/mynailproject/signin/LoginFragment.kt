@@ -170,6 +170,7 @@ class LoginFragment : Fragment() {
     }
 
     fun reload(user: FirebaseUser?){
+        Log.d("Reload", user?.isEmailVerified().toString())
         Log.d("Reload", "Aaaa")
         v.findNavController().navigate(R.id.action_global_myOfficeFragment)
     }

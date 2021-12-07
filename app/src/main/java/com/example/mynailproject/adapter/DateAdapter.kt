@@ -15,14 +15,19 @@ import com.example.mynailproject.PriceFragmentDirections
 import com.example.mynailproject.R
 import com.example.mynailproject.Record.RecordServiceFragmentDirections
 import com.example.mynailproject.database.DBCall
-import com.example.mynailproject.database.ServiceType
+import com.example.mynailproject.database.ServiceDate
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
 
-class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerView.Adapter<PriceAdapter.ViewHolder>() {
+class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerView.Adapter<DateAdapter.ViewHolder>() {
 
     private val viewBinderHelper = ViewBinderHelper()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_price, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_date, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -34,21 +39,15 @@ class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerV
 
         viewBinderHelper.setOpenOnlyOne(true)
 
-        viewBinderHelper.bind(holder.layout, currentItem.name)
-        viewBinderHelper.closeLayout(currentItem.name)
-        holder.name.text = currentItem.name
-        holder.price.text = currentItem.price.toString()
+        viewBinderHelper.bind(holder.layout, currentItem.date)
+        viewBinderHelper.closeLayout(currentItem.date)
+        holder.date_name.text = convertLongToDate(currentItem.date!!.toLong())
+        holder.time_name.text = currentItem.hour.toString()+":00"
 
-        // редактирование услуги
-        holder.edit.setOnClickListener {
-            val action = PriceFragmentDirections.actionPriceFragmentToAddServiceFragment(currentItem.id!!, list.size)
-            holder.itemView.findNavController().navigate(action)
-        }
-
-        // удаление услуги
+        // удаление записи
         holder.delete.setOnClickListener {
             val db_call = DBCall()
-            db_call.deleteServType(currentItem.id!!)
+            db_call.deleteServDate( currentItem.date)
         }
 
         /*holder.name.setOnClickListener {
@@ -58,21 +57,25 @@ class PriceAdapter(val context: Context, val list: List<ServiceType>): RecyclerV
         }*/
 
         holder.main_layout.setOnClickListener {
-            val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString(), currentItem.time!!, currentItem.id!!)
-            holder.itemView.findNavController().navigate(action)
+            //val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString(), currentItem.time!!, currentItem.id!!)
+            //holder.itemView.findNavController().navigate(action)
         }
     }
 
 
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.date_name)
-        val price: TextView = itemView.findViewById(R.id.time_name)
-        val edit: ImageView = itemView.findViewById(R.id.img_edit)
+        val date_name: TextView = itemView.findViewById(R.id.date_name)
+        val time_name: TextView = itemView.findViewById(R.id.time_name)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
         val main_layout: ConstraintLayout = itemView.findViewById(R.id.layout)
     }
 
+    private fun convertLongToDate(time: Long): String{
+        val date = Date(time)
+        val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return format.format(date)
+    }
 
 }

@@ -1,19 +1,16 @@
 package com.example.mynailproject.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.example.mynailproject.R
-import com.example.mynailproject.Record.RecordServiceFragmentDirections
 import com.example.mynailproject.database.Time
 
 class TimeAdapter(val context: Context, val list: List<Time>, val time: Int?): RecyclerView.Adapter<TimeAdapter.ViewHolder>() {
@@ -82,7 +79,7 @@ class TimeAdapter(val context: Context, val list: List<Time>, val time: Int?): R
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.hour_name)
+        val name: TextView = itemView.findViewById(R.id.date_name)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
         val main_layout: ConstraintLayout = itemView.findViewById(R.id.layout)
     }

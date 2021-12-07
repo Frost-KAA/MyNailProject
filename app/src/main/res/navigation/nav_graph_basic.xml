@@ -40,7 +40,11 @@
         android:id="@+id/myOfficeFragment"
         android:name="com.example.mynailproject.MyOfficeFragment"
         android:label="fragment_my_office"
-        tools:layout="@layout/fragment_my_office" />
+        tools:layout="@layout/fragment_my_office" >
+        <action
+            android:id="@+id/action_myOfficeFragment_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mynailproject.signin.LoginFragment"

@@ -36,19 +36,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/hello" />
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ps"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Длительность услуги 2 часа"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -57,7 +50,21 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintTop_toBottomOf="@+id/data_record" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/data_record"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Дата"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/hello" />
 
     <Button
         android:id="@+id/save"
@@ -81,5 +88,15 @@
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/ps"
         tools:listitem="@layout/card_time" />
+
+    <ImageButton
+        android:id="@+id/button_record_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/ic_baseline_date_range_24"
+        app:layout_constraintTop_toBottomOf="@+id/hello"
+        tools:layout_editor_absoluteX="298dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

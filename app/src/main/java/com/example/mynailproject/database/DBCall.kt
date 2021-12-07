@@ -17,6 +17,8 @@ import java.util.concurrent.FutureTask
 class DBCall {
 
     private var database: DatabaseReference = Firebase.database.reference
+    val auth = Firebase.auth
+    val current_user = auth.currentUser
 
     fun addNewUser(uid: String, user: User){
         database.child("users").child(uid).setValue(user)
@@ -45,17 +47,32 @@ class DBCall {
 
     fun addRecord(uid: String, date:String, hour: Int, time:Int, serv: Int){
         var i: Int = 0
-        val auth = Firebase.auth
-        val current_user = auth.currentUser
-
         while(i < time){
-            database.child("masters").child(uid).child("date").child(date).child((hour+i).toString()).setValue("False")
+            database.child("masters").child(uid).child("date").child(date).child((hour+i).toString()).setValue(current_user?.uid)
             i++
         }
 
-        database.child("users").child(current_user?.uid!!).child("date").child(date).child("hour").setValue(hour)
-        database.child("users").child(current_user?.uid!!).child("date").child(date).child("master").setValue(uid)
-        database.child("users").child(current_user?.uid!!).child("date").child(date).child("service").setValue("00"+serv.toString())
+        val d = ServiceDate(hour, "00"+serv.toString(), uid, date)
+        database.child("users").child(current_user?.uid!!).child("date").child(date).setValue(d)
+    }
+
+
+    fun deleteServDate(date: String){
+        database.child("users").child(current_user?.uid!!).child("date").child(date).removeValue()
+    }
+
+    fun addWorkTime(startDate: Long, endDate: Long, startTime: Int, endTime: Int){
+        var date: Long = startDate
+        while(date <= endDate){
+            var time: Int = startTime
+            while(time < endTime){
+                database.child("masters").child(current_user?.uid!!).child("date").child(date.toString()).child(time.toString()).setValue("True")
+                time ++
+            }
+            date += 24*60*60*1000
+
+        }
+
     }
 
 

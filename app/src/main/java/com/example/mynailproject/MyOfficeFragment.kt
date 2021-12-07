@@ -8,11 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CalendarView
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.navigation.findNavController
-import com.example.mynailproject.database.DBCall
-import com.example.mynailproject.database.User
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mynailproject.adapter.DateAdapter
+import com.example.mynailproject.adapter.StaffAdapter
+import com.example.mynailproject.database.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,8 +35,14 @@ class MyOfficeFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private var database: DatabaseReference = Firebase.database.reference
 
+    lateinit var recycler_now : RecyclerView
+    lateinit var recycler_history : RecyclerView
+    val list_now = ArrayList<ServiceDate>()
+    val list_history = ArrayList<ServiceDate>()
+
     lateinit var surname : TextView
     lateinit var name : TextView
+    var current_user: FirebaseUser? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +56,7 @@ class MyOfficeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         auth = Firebase.auth
-        val current_user = auth.currentUser
+        current_user = auth.currentUser
         addUserEventListener(database, current_user?.uid!!)
 
         surname = view.findViewById(R.id.u_surname)
@@ -59,16 +70,28 @@ class MyOfficeFragment : Fragment() {
         }
 
         // Редактирование аккаунта
-        val edit: Button = view.findViewById(R.id.button_edit_user)
+        val edit: ImageButton = view.findViewById(R.id.button_edit_user)
         edit.setOnClickListener {
             view.findNavController().navigate(R.id.action_global_infoSignupFragment)
         }
 
+        val work: Button = view.findViewById(R.id.button_to_work)
+        work.setOnClickListener {
+            view.findNavController().navigate(R.id.action_myOfficeFragment_to_bookingFragment)
+        }
 
-        val info: TextView = view.findViewById(R.id.text_info)
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
-        info.text = currentUser?.uid.toString()
+        //подключение адаптера
+        recycler_now =  view.findViewById(R.id.recycler_view_now)
+        recycler_now.adapter = this.context?.let { DateAdapter(it, list_now) }
+        recycler_now.layoutManager = LinearLayoutManager(this.context)
+        recycler_now.setHasFixedSize(true)
+
+        //подключение адаптера
+        recycler_history =  view.findViewById(R.id.recycler_view_history)
+        recycler_history.adapter = this.context?.let { DateAdapter(it, list_history) }
+        recycler_history.layoutManager = LinearLayoutManager(this.context)
+        recycler_history.setHasFixedSize(true)
+
     }
 
     fun addUserEventListener(userReference: DatabaseReference, uid:String) {
@@ -83,6 +106,25 @@ class MyOfficeFragment : Fragment() {
                 val user = dataSnapshot.child("users").child(uid).getValue<User>()
                 surname.text = user?.surname
                 name.text = user?.name
+
+                //val sdf = SimpleDateFormat("yyyy,MM,dd")
+                //val currentDate = sdf.format(Date())
+                val now = Date().time
+                if (list_now.size > 0) list_now.clear()
+                if (list_history.size > 0) list_history.clear()
+                for (ds in dataSnapshot.child("users").child(current_user?.uid!!).child("date").children){
+                    val d: ServiceDate? = ds.getValue<ServiceDate>()
+                    if (d != null) {
+                        if (d.date!! >= now.toString()) list_now.add(d)
+                        else list_history.add(d)
+                        //val d_format = d.date!!.substring(6)+d.date!!.substring(2,6)+d.date!!.substring(0,2)
+                        //Log.d("DATEE", d_format)
+                        //if (d_format >= currentDate) list_now.add(d)
+                        //else list_history.add(d)
+                    }
+                }
+                recycler_now.adapter?.notifyDataSetChanged()
+                recycler_history.adapter?.notifyDataSetChanged()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
