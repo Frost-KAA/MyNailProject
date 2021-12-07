@@ -84,14 +84,13 @@
             android:name="number"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_addServiceFragment_to_priceFragment"
+            app:destination="@id/priceFragment" />
         <argument
-            android:name="size"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="isAdded"
+            app:argType="boolean" />
     </fragment>
-    <action
-        android:id="@+id/action_global_priceFragment"
-        app:destination="@id/priceFragment" />
     <fragment
         android:id="@+id/addStaffFragment"
         android:name="com.example.mynailproject.additional.AddStaffFragment"
@@ -103,9 +102,6 @@
             app:nullable="true"
             android:defaultValue="null" />
     </fragment>
-    <action
-        android:id="@+id/action_global_staffFragment"
-        app:destination="@id/staffFragment" />
     <fragment
         android:id="@+id/infoStaffFragment"
         android:name="com.example.mynailproject.additional.InfoStaffFragment"
@@ -121,6 +117,9 @@
         <action
             android:id="@+id/action_recordServiceFragment_to_recordStaffFragment"
             app:destination="@id/recordStaffFragment" />
+        <action
+            android:id="@+id/action_recordServiceFragment_to_priceFragment"
+            app:destination="@id/priceFragment" />
     </fragment>
     <fragment
         android:id="@+id/recordStaffFragment"
@@ -140,6 +139,9 @@
         <argument
             android:name="serv"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_recordStaffFragment_to_staffFragment"
+            app:destination="@id/staffFragment" />
     </fragment>
     <fragment
         android:id="@+id/recordBookingFragment"

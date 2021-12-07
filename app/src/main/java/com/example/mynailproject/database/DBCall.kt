@@ -63,8 +63,11 @@ class DBCall {
         }
     }
 
-    fun addNewServType(id: Int, ser: ServiceType){
+    fun addNewServType(id: Int, ser: ServiceType, list: ArrayList<String>){
         database.child("service_type").child("00"+id.toString()).setValue(ser)
+        for (item in list){
+            database.child("service_type").child("00"+id.toString()).child("masters").child("uid").setValue(item)
+        }
     }
 
     fun deleteServType(id: Int){

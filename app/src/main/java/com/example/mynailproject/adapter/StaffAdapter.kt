@@ -11,27 +11,14 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
-import com.example.mynailproject.PriceFragmentDirections
 import com.example.mynailproject.R
-import com.example.mynailproject.Record.RecordStaffFragmentDirections
-import com.example.mynailproject.StaffFragmentDirections
-import com.example.mynailproject.additional.InfoStaffFragmentDirections
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.Master
-import com.example.mynailproject.database.ServiceType
-import com.example.mynailproject.database.User
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -56,6 +43,7 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
         if (role == null || role == "client"){
             holder.delete.visibility = View.GONE
         }
+        holder.img_info.visibility = View.GONE
 
         viewBinderHelper.setOpenOnlyOne(true)
         viewBinderHelper.bind(holder.layout, currentItem.user?.name)
@@ -94,12 +82,6 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
             notifyDataSetChanged()
         }
 
-        // Для "О салоне"
-        /*holder.lin_layout.setOnClickListener {
-            val action = StaffFragmentDirections.actionStaffFragmentToInfoStaffFragment(currentItem.uid!!)
-            holder.itemView.findNavController().navigate(action)
-        }*/
-
     }
 
 
@@ -110,10 +92,11 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
         val surname: TextView = itemView.findViewById(R.id.staff_surname)
         val image: ImageView = itemView.findViewById(R.id.image_staff)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)
+        val img_info: ImageView = itemView.findViewById(R.id.img_info_master)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
         val lin_layout: LinearLayout = itemView.findViewById(R.id.layout_staff_card)
         val detail_layout: ConstraintLayout = itemView.findViewById(R.id.layout_details)
-        val info: TextView = itemView.findViewById(R.id.details_info)
+        val info: TextView = itemView.findViewById(R.id.details_info_text)
     }
 
 

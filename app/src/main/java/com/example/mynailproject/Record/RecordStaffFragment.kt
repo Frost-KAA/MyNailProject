@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mynailproject.BasicActivity
 import com.example.mynailproject.R
 import com.example.mynailproject.adapter.RecordStaffAdapter
 import com.example.mynailproject.adapter.StaffAdapter
@@ -46,6 +47,8 @@ class RecordStaffFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Выберите специалиста"
 
         //подключение адаптера
         recycler =  view.findViewById(R.id.recycler_view_staff)

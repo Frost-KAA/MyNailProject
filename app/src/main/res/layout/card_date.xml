@@ -98,7 +98,7 @@
 
 
             <TextView
-                android:id="@+id/details_info"
+                android:id="@+id/details_info_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -110,7 +110,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/details_master"
+                android:id="@+id/details_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -118,7 +118,7 @@
                 android:text="Уливанова"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/details_info"
+                app:layout_constraintStart_toEndOf="@+id/details_info_text"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -131,7 +131,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_info" />
+                app:layout_constraintTop_toBottomOf="@+id/details_info_text" />
 
             <TextView
                 android:id="@+id/details_service"
@@ -143,7 +143,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/details_service_text"
-                app:layout_constraintTop_toBottomOf="@+id/details_master" />
+                app:layout_constraintTop_toBottomOf="@+id/details_info" />
 
             <TextView
                 android:id="@+id/details_time_text"

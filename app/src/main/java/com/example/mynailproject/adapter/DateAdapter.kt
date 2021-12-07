@@ -13,7 +13,6 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.example.mynailproject.R
 import com.example.mynailproject.database.*
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -23,7 +22,6 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.Collections.list
 import kotlin.collections.ArrayList
 
 class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerView.Adapter<DateAdapter.ViewHolder>() {
@@ -110,7 +108,7 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerVi
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
         val main_layout: ConstraintLayout = itemView.findViewById(R.id.layout)
         val detail_layout: ConstraintLayout = itemView.findViewById(R.id.layout_details)
-        val master: TextView = itemView.findViewById(R.id.details_master)
+        val master: TextView = itemView.findViewById(R.id.details_info)
         val time: TextView = itemView.findViewById(R.id.details_time)
         val service: TextView = itemView.findViewById(R.id.details_service)
         val price: TextView = itemView.findViewById(R.id.details_price)

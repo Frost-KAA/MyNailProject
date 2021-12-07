@@ -13,10 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNailProject">
         <activity
-            android:name=".MainActivity2222"
-            android:label="@string/title_activity_main2222"
-            android:theme="@style/Theme.MyNailProject.NoActionBar"></activity>
-        <activity
             android:name=".BasicActivity"
             android:label="@string/title_activity_basic"
             android:theme="@style/Theme.MyNailProject.NoActionBar" />

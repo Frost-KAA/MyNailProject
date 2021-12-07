@@ -48,27 +48,16 @@ class RecordStaffAdapter(val context: Context, val list: List<Master>, val time:
 
         viewBinderHelper.bind(holder.layout, currentItem.user?.name)
         viewBinderHelper.closeLayout(currentItem.user?.name)
+        holder.delete.visibility = View.GONE
+        holder.detail_layout.visibility = View.GONE
+
         holder.name.text = currentItem.user?.name
         holder.pathronim.text = currentItem.user?.pathronim
         holder.surname.text = currentItem.user?.surname
 
-        // редактирование услуги
-        holder.edit.setOnClickListener {
-            val action = StaffFragmentDirections.actionStaffFragmentToAddStaffFragment(currentItem.uid)
-            holder.itemView.findNavController().navigate(action)
+        holder.img_info.setOnClickListener {
+            holder.itemView.findNavController().navigate(R.id.action_recordStaffFragment_to_staffFragment)
         }
-
-        // удаление услуги
-        holder.delete.setOnClickListener {
-            val db_call = DBCall()
-            db_call.deleteMaster(currentItem.uid!!)
-        }
-
-        // Для "О салоне"
-        /*holder.lin_layout.setOnClickListener {
-            val action = StaffFragmentDirections.actionStaffFragmentToInfoStaffFragment(currentItem.uid!!)
-            holder.itemView.findNavController().navigate(action)
-        }*/
 
         holder.lin_layout.setOnClickListener {
             val action = RecordStaffFragmentDirections.actionRecordStaffFragmentToRecordBookingFragment(currentItem.uid, time!!, serv!!)
@@ -76,16 +65,15 @@ class RecordStaffAdapter(val context: Context, val list: List<Master>, val time:
         }
     }
 
-
-
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.staff_name)
         val pathronim: TextView = itemView.findViewById(R.id.staff_pathronim)
         val surname: TextView = itemView.findViewById(R.id.staff_surname)
-        val edit: ImageView = itemView.findViewById(R.id.img_edit)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)
+        val img_info: ImageView = itemView.findViewById(R.id.img_info_master)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)
         val lin_layout: LinearLayout = itemView.findViewById(R.id.layout_staff_card)
+        val detail_layout: ConstraintLayout = itemView.findViewById(R.id.layout_details)
     }
 
 

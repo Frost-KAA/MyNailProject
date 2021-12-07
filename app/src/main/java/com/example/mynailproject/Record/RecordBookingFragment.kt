@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mynailproject.R
 import com.example.mynailproject.adapter.TimeAdapter
 import com.example.mynailproject.database.DBCall
-import com.example.mynailproject.database.ServiceType
 import com.example.mynailproject.database.Time
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.database.DataSnapshot
@@ -88,7 +86,7 @@ class RecordBookingFragment : Fragment() {
         }
 
         //подключение адаптера
-        recycler =  view.findViewById(R.id.recycler_view)
+        recycler =  view.findViewById(R.id.recycler_view_masters)
         recycler.adapter = this.context?.let { TimeAdapter(it, list, time) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)

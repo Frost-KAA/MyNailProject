@@ -1,17 +1,17 @@
-package com.example.mynailproject.Record
+package com.example.mynailproject.additional
 
+import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynailproject.BasicActivity
 import com.example.mynailproject.R
-import com.example.mynailproject.adapter.RecordPriceAdapter
-import com.example.mynailproject.database.ServiceType
+import com.example.mynailproject.adapter.MasterListDialogAdapter
+import com.example.mynailproject.database.Master
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -20,41 +20,49 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
-class RecordServiceFragment : Fragment() {
+
+class MastersListDialogFragment(context: Context, var clicked_lick: ArrayList<String>, val fr: Fragment) : Dialog(context){
 
     lateinit var recycler : RecyclerView
-    val list = ArrayList<ServiceType>()
     private var database: DatabaseReference = Firebase.database.reference
+    val list = ArrayList<Master>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        setContentView(R.layout.fragment_masters_list_dialog)
+
         addUserEventListener(database)
-        return inflater.inflate(R.layout.fragment_record_service, container, false)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val activity: BasicActivity = activity as BasicActivity
-        activity.supportActionBar?.title = "Выберите услугу"
-
-        //подключение адаптера
-        recycler =  view.findViewById(R.id.recycler_view_masters)
-        recycler.adapter = this.context?.let { RecordPriceAdapter(it, list) }
+        recycler =  findViewById(R.id.recycler_view_masters)
+        recycler.adapter = this.context.let { MasterListDialogAdapter(it, list, clicked_lick) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
+
+
+        val yes: Button = findViewById(R.id.no)
+        val no: Button = findViewById(R.id.yes)
+
+        yes.setOnClickListener{
+            clicked_lick = (recycler.adapter as MasterListDialogAdapter).getClickedList()
+            val fragment = fr as AddServiceFragment
+            fragment.getClicked(clicked_lick)
+            dismiss()
+        }
+        no.setOnClickListener{
+            dismiss()
+        }
+
     }
 
     fun addUserEventListener(userReference: DatabaseReference) {
         val userListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (list.size > 0) list.clear()
-                for (ds in dataSnapshot.child("service_type").children){
-                    val serv: ServiceType? = ds.getValue<ServiceType>()
-                    if (serv != null) {
-                        Log.d("SERV", serv.name.toString())
-                        list.add(serv)
+                for (ds in dataSnapshot.child("masters").children){
+                    val mast: Master? = ds.getValue<Master>()
+                    if (mast != null) {
+                        list.add(mast)
                     }
                 }
                 recycler.adapter?.notifyDataSetChanged()

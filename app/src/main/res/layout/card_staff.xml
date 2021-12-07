@@ -35,6 +35,19 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_baseline_delete_24"
             app:tint="@color/shrine_pink_900" />
+
+        <ImageView
+            android:id="@+id/img_info_master"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_baseline_info_24"
+            app:tint="@color/shrine_pink_900" />
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
-        android:backgroundTint="@color/shrine_pink_100"
+        android:backgroundTint="@color/shrine_pink_50"
         android:minHeight="100dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +68,7 @@
 
 
             <TextView
-                android:id="@+id/details_info"
+                android:id="@+id/details_info_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

@@ -107,7 +107,7 @@ class AddStaffFragment : Fragment() {
             val mas = Master(uid, info, user)
             val db_call = DBCall()
             db_call.editMaster(uid, mas)
-            view.findNavController().navigate(R.id.action_global_staffFragment)
+            //view.findNavController().navigate(R.id.action_global_staffFragment)
         }
     }
 

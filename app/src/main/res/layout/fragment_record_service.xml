@@ -21,31 +21,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/hello"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Выберите услугу"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/shrine_pink_900"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_masters"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/hello"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/card_price" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

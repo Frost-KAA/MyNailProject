@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynailproject.adapter.PriceAdapter
+import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.ServiceType
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
@@ -38,16 +39,25 @@ class PriceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Описание услуг"
 
         //подключение адаптера
-        recycler =  view.findViewById(R.id.recycler_view)
+        recycler =  view.findViewById(R.id.recycler_view_masters)
         recycler.adapter = this.context?.let { PriceAdapter(it, list) }
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
 
         val add_b : FloatingActionButton = view.findViewById(R.id.add_button)
+
+        val role = DBCall.CurrentRole.getRole()
+        if (role == null || role == "client"){
+            Log.d("ROLE", role.toString())
+            add_b.visibility = View.GONE
+        }
+
         add_b.setOnClickListener {
-            val action = PriceFragmentDirections.actionPriceFragmentToAddServiceFragment(0, list[list.size - 1].id!!)
+            val action = PriceFragmentDirections.actionPriceFragmentToAddServiceFragment((list[list.size - 1].id!!)+1, true)
             view.findNavController().navigate(action)
         }
     }
