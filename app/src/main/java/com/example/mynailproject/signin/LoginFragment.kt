@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
+import com.example.mynailproject.BasicActivity
 import com.example.mynailproject.R
 import com.example.mynailproject.database.DBCall
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -43,6 +44,9 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Вход в личный кабинет"
+
         v = view
         auth = Firebase.auth
         val currentUser = auth.currentUser

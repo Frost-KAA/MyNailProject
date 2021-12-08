@@ -59,43 +59,23 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerVi
         holder.service.text = current?.serv
         holder.price.text = current?.price.toString()+" рублей"
         var time_text = current?.time.toString()+" часов"
-        if (current?.time==1)  time_text = current?.time.toString()+" час"
+        if (current?.time==1)  time_text = current.time.toString()+" час"
         holder.time.text = time_text
 
         if (current?.expanded == true) holder.detail_layout.visibility=View.VISIBLE
         else holder.detail_layout.visibility = View.GONE
 
         holder.main_layout.setOnClickListener {
-            if (current?.expanded == true) current?.expanded=false
+            if (current?.expanded == true) current.expanded=false
             else current?.expanded=true
             notifyItemChanged(position)
         }
 
-        /*val isExpanded = position == mExpandedPosition
-        holder.detail_layout.setVisibility(if (isExpanded) View.VISIBLE else View.GONE)
-        holder.itemView.isActivated = isExpanded
-
-        if (isExpanded)
-            previousExpandedPosition = position;
-
-        holder.main_layout.setOnClickListener {
-            if (isExpanded)
-                previousExpandedPosition = position;
-
-        }*/
-
-
         // удаление записи
         holder.delete.setOnClickListener {
             val db_call = DBCall()
-            db_call.deleteServDate(currentItem.date)
+            db_call.deleteServDate(currentItem.date, currentItem.master_uid!!, currentItem.hour!!, current?.time!!)
         }
-
-        /*holder.name.setOnClickListener {
-            Log.d("CLICK", currentItem.id.toString())
-            val action = RecordServiceFragmentDirections.actionRecordServiceFragmentToRecordStaffFragment("00"+currentItem.id.toString())
-            holder.itemView.findNavController().navigate(action)
-        }*/
 
     }
 
@@ -130,7 +110,7 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerVi
                     Log.d("LIISt", item.toString())
                     val serv = dataSnapshot.child("service_type").child(item.serv_id!!).getValue<ServiceType>()
                     val mast = dataSnapshot.child("masters").child(item.master_uid!!).child("user").getValue<User>()
-                    val detail = ServiceDateCard(item.hour, item.date, false, serv?.name, serv?.price, serv?.time, mast?.surname+" "+mast?.name+" "+mast?.pathronim)
+                    val detail = ServiceDateCard(item.hour, item.date, false, serv?.name, serv?.price, serv?.time, mast?.surname+" "+mast?.name?.substring(0,1)+"."+mast?.pathronim?.substring(0,1)+".")
                     data_list.add(detail)
                 }
                 notifyDataSetChanged()

@@ -1,7 +1,6 @@
 package com.example.mynailproject.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,24 +9,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
-import com.example.mynailproject.PriceFragmentDirections
 import com.example.mynailproject.R
 import com.example.mynailproject.Record.RecordStaffFragmentDirections
-import com.example.mynailproject.StaffFragmentDirections
-import com.example.mynailproject.additional.InfoStaffFragmentDirections
-import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.Master
-import com.example.mynailproject.database.ServiceType
-import com.example.mynailproject.database.User
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 
 class RecordStaffAdapter(val context: Context, val list: List<Master>, val time: Int?, val serv: Int?): RecyclerView.Adapter<RecordStaffAdapter.ViewHolder>() {
 
@@ -66,9 +53,9 @@ class RecordStaffAdapter(val context: Context, val list: List<Master>, val time:
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.staff_name)
-        val pathronim: TextView = itemView.findViewById(R.id.staff_pathronim)
-        val surname: TextView = itemView.findViewById(R.id.staff_surname)
+        val name: TextView = itemView.findViewById(R.id.u_name)
+        val pathronim: TextView = itemView.findViewById(R.id.u_pathronim)
+        val surname: TextView = itemView.findViewById(R.id.u_surname)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)
         val img_info: ImageView = itemView.findViewById(R.id.img_info_master)
         val layout : SwipeRevealLayout = itemView.findViewById(R.id.swipe_layout)

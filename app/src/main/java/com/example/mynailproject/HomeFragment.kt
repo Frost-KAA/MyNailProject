@@ -31,10 +31,10 @@ class HomeFragment : Fragment() {
         val text1 = view.findViewById<TextView>(R.id.hello_name)
         text1.text = "Рады видеть вас!"
 
-        /*val bottom = view.findViewById<Button>(R.id.button_service)
+        val bottom = view.findViewById<Button>(R.id.button_service)
         bottom.setOnClickListener {
-            view.findNavController().navigate(R.id.action_global_bookingFragment)
-        }*/
+            view.findNavController().navigate(R.id.action_homeFragment_to_recordServiceFragment)
+        }
 
     }
 }

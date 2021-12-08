@@ -47,6 +47,11 @@ class BookingFragment : Fragment() {
         start_time_view = view.findViewById(R.id.start_time)
         end_time_view = view.findViewById(R.id.end_time)
 
+        start_view.text = ""
+        end_view.text = ""
+        start_time_view.text = ""
+        end_time_view.text = ""
+
         val button_calendar: ImageButton = view.findViewById(R.id.button_calendar)
         button_calendar.setOnClickListener {
             showDateRangePicker()

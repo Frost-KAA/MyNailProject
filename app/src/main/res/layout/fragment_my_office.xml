@@ -5,17 +5,165 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MyOfficeFragment">
 
-    <Button
-        android:id="@+id/button_exit"
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Выйти"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="70dp"
+        app:dragEdge="right"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline6" />
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mode="same_level">
+
+        <!--Swipe Layout -->
+
+        <LinearLayout
+            android:id="@+id/swipe"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:minHeight="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_exit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_baseline_exit_to_app_24"
+                app:tint="@color/shrine_pink_900" />
+
+            <ImageView
+                android:id="@+id/img_edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:tint="@color/shrine_pink_900" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:backgroundTint="@color/shrine_pink_200"
+            android:minHeight="100dp">
+
+            <LinearLayout
+                android:id="@+id/layout_staff_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/image_staff"
+                    android:layout_width="100dp"
+                    android:layout_height="90dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_baseline_person_outline_24" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:minHeight="100dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/u_surname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:minHeight="20dp"
+                        android:text="Антипченко"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/u_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:minHeight="20dp"
+                        android:text="Максим"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/u_pathronim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:minHeight="20dp"
+                        android:text="Денисович"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_master"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_master"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_baseline_diamond_24" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/master_text"
+                            style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-5dp"
+                            android:gravity="top"
+                            android:text="Мастер"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/shrine_pink_900"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Main Layout -->
+
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -32,44 +180,12 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/u_surname"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="left|center_vertical"
-        android:text="Фамилия"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/shrine_pink_900"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/button_edit_user"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/u_name"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="left|center_vertical"
-        android:text="Имя"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/shrine_pink_900"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/button_edit_user"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/u_surname" />
-
-    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ps"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
         android:gravity="center"
         android:text="Текущие записи"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -77,81 +193,38 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/u_name" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ps2"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="История записей"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/shrine_pink_900"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_now" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/ic_baseline_person_outline_24"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/swipe_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_now"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/ps"
         tools:listitem="@layout/card_date" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_history"
-        android:layout_width="0dp"
-        android:layout_height="108dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/ps2"
-        tools:listitem="@layout/card_date" />
-
-    <ImageButton
-        android:id="@+id/button_edit_user"
-        android:layout_width="52dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
-        android:background="#FFFFFF"
-        android:src="@drawable/ic_baseline_edit_24"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/shrine_pink_900" />
-
-    <Button
-        android:id="@+id/button_to_work"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Ввести время работы"
-        app:layout_constraintBottom_toTopOf="@+id/button_exit"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline6" />
-
     <Button
         android:id="@+id/button_work"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Посмотреть время работы"
-        app:layout_constraintBottom_toTopOf="@+id/button_to_work"
+        android:layout_marginBottom="30dp"
+        android:text="Время работы"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+    <ImageButton
+        android:id="@+id/button_record_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/ic_baseline_history_24"
+        app:layout_constraintStart_toEndOf="@+id/ps"
+        app:layout_constraintTop_toTopOf="@+id/ps" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

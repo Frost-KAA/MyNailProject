@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,12 +34,12 @@ class MyOfficeFragment : Fragment() {
     private var database: DatabaseReference = Firebase.database.reference
 
     lateinit var recycler_now : RecyclerView
-    lateinit var recycler_history : RecyclerView
     val list_now = ArrayList<ServiceDate>()
     val list_history = ArrayList<ServiceDate>()
 
     lateinit var surname : TextView
     lateinit var name : TextView
+    lateinit var pathronim: TextView
     var current_user: FirebaseUser? = null
 
     override fun onCreateView(
@@ -55,6 +52,8 @@ class MyOfficeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Личный кабинет"
 
         auth = Firebase.auth
         current_user = auth.currentUser
@@ -62,29 +61,40 @@ class MyOfficeFragment : Fragment() {
 
         surname = view.findViewById(R.id.u_surname)
         name = view.findViewById(R.id.u_name)
+        pathronim = view.findViewById(R.id.u_pathronim)
+
+        val master_crown: LinearLayout = view.findViewById(R.id.layout_master)
+        val see_work: Button = view.findViewById(R.id.button_work)
+
+        val role = DBCall.CurrentRole.getRole()
+        if (role == null || role == "client"){
+            master_crown.visibility = View.GONE
+            see_work.visibility = View.GONE
+        }
 
         // Выход из аккаунта
-        val exit: Button = view.findViewById(R.id.button_exit)
+        val exit: ImageView = view.findViewById(R.id.img_exit)
         exit.setOnClickListener {
             Firebase.auth.signOut()
             view.findNavController().navigate(R.id.action_global_loginFragment)
         }
 
         // Редактирование аккаунта
-        val edit: ImageButton = view.findViewById(R.id.button_edit_user)
+        val edit: ImageView = view.findViewById(R.id.img_edit)
         edit.setOnClickListener {
             view.findNavController().navigate(R.id.action_global_infoSignupFragment)
         }
 
-        val work: Button = view.findViewById(R.id.button_to_work)
-        work.setOnClickListener {
-            view.findNavController().navigate(R.id.action_myOfficeFragment_to_bookingFragment)
-        }
-
-        val see_work: Button = view.findViewById(R.id.button_work)
+        // просомтр времени работы для мастера
         see_work.setOnClickListener{
             val action =MyOfficeFragmentDirections.actionMyOfficeFragmentToRecordBookingFragment(current_user?.uid, 0, 0)
             view.findNavController().navigate(action)
+        }
+
+        //просмотр истории записей
+        val history: ImageButton = view.findViewById(R.id.button_record_history)
+        history.setOnClickListener {
+            view.findNavController().navigate(R.id.action_myOfficeFragment_to_historyFragment)
         }
 
         //подключение адаптера
@@ -92,13 +102,6 @@ class MyOfficeFragment : Fragment() {
         recycler_now.adapter = this.context?.let { DateAdapter(it, list_now) }
         recycler_now.layoutManager = LinearLayoutManager(this.context)
         recycler_now.setHasFixedSize(true)
-
-        //подключение адаптера
-        recycler_history =  view.findViewById(R.id.recycler_view_history)
-        recycler_history.adapter = this.context?.let { DateAdapter(it, list_history) }
-        recycler_history.layoutManager = LinearLayoutManager(this.context)
-        recycler_history.setHasFixedSize(true)
-
     }
 
     fun addUserEventListener(userReference: DatabaseReference, uid:String) {
@@ -113,9 +116,8 @@ class MyOfficeFragment : Fragment() {
                 val user = dataSnapshot.child("users").child(uid).getValue<User>()
                 surname.text = user?.surname
                 name.text = user?.name
+                pathronim.text = user?.pathronim
 
-                //val sdf = SimpleDateFormat("yyyy,MM,dd")
-                //val currentDate = sdf.format(Date())
                 val now = Date().time
                 if (list_now.size > 0) list_now.clear()
                 if (list_history.size > 0) list_history.clear()
@@ -124,18 +126,12 @@ class MyOfficeFragment : Fragment() {
                     if (d != null) {
                         if (d.date!! >= now.toString()) list_now.add(d)
                         else list_history.add(d)
-                        //val d_format = d.date!!.substring(6)+d.date!!.substring(2,6)+d.date!!.substring(0,2)
-                        //Log.d("DATEE", d_format)
-                        //if (d_format >= currentDate) list_now.add(d)
-                        //else list_history.add(d)
                     }
                 }
                 recycler_now.adapter?.notifyDataSetChanged()
-                recycler_history.adapter?.notifyDataSetChanged()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
             }
         }

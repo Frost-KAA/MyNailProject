@@ -13,7 +13,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="120dp"
 
         android:hint="Адрес электронной почты"
         app:boxBackgroundColor="@color/design_default_color_background"
@@ -66,23 +66,23 @@
         android:id="@+id/button_login_google"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="Войти c помощью Google"
         app:layout_constraintBottom_toTopOf="@+id/button_to_signup_frame"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
 
 
     <Button
         android:id="@+id/button_to_signup_frame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:text="Регистрация"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

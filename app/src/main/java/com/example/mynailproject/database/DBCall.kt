@@ -30,19 +30,21 @@ class DBCall {
                 val auth = Firebase.auth
                 val current_user = auth.currentUser
                 val database: DatabaseReference = Firebase.database.reference
-                val userListener = object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        current_role = dataSnapshot.child("users").child(current_user?.uid!!)
-                            .getValue<User>()?.role
-                        Log.d("CURR0", current_role.toString())
-                    }
+                if (current_user != null){
+                    val userListener = object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            current_role = dataSnapshot.child("users").child(current_user.uid)
+                                .getValue<User>()?.role
+                            Log.d("CURR0", current_role.toString())
+                        }
 
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        current_role = null
-                        Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            current_role = null
+                            Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                        }
                     }
+                    database.addValueEventListener(userListener)
                 }
-                database.addValueEventListener(userListener)
             }
             t.start()
             t.join()
@@ -66,7 +68,14 @@ class DBCall {
     fun addNewServType(id: Int, ser: ServiceType, list: ArrayList<String>){
         database.child("service_type").child("00"+id.toString()).setValue(ser)
         for (item in list){
-            database.child("service_type").child("00"+id.toString()).child("masters").child("uid").setValue(item)
+            database.child("service_type").child("00"+id.toString()).child("masters").child(item).setValue(item)
+        }
+    }
+
+    fun addNewMaster(id: String, mast: Master, list: ArrayList<String>){
+        database.child("masters").child(id).setValue(mast)
+        for (item in list){
+            database.child("service_type").child(item).child("masters").child(mast.uid!!).setValue(mast.uid)
         }
     }
 
@@ -76,7 +85,7 @@ class DBCall {
 
     fun deleteMaster(uid: String){
         database.child("masters").child(uid).removeValue()
-        //database.child("users").child(uid).child("role").setValue("client")
+        database.child("users").child(uid).child("role").setValue("client")
     }
 
     fun editMaster(uid: String, master: Master){
@@ -95,8 +104,14 @@ class DBCall {
     }
 
 
-    fun deleteServDate(date: String){
+    fun deleteServDate(date: String, master_uid: String, hour: Int, time: Int){
         database.child("users").child(current_user?.uid!!).child("date").child(date).removeValue()
+        var t = 0
+        while(t < time){
+            database.child("masters").child(master_uid).child("date").child(date).child((hour+t).toString()).setValue("Tue")
+            t++
+        }
+
     }
 
     fun addWorkTime(startDate: Long, endDate: Long, startTime: Int, endTime: Int){
@@ -112,28 +127,6 @@ class DBCall {
         }
     }
 
-    fun getRole(): String?{
-        var current_role: String? = null
-        val t = Thread {
-            val userListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    current_role = dataSnapshot.child("users").child(current_user?.uid!!)
-                        .getValue<User>()?.role
-                    Log.d("CURR0", current_role.toString())
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    current_role = null
-                    Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
-                }
-            }
-            database.addValueEventListener(userListener)
-        }
-        t.start()
-        t.join()
-        Log.d("CURR", current_role.toString())
-        return current_role
-    }
 
 
 

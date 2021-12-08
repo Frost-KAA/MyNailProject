@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mynailproject.BasicActivity
+import com.example.mynailproject.MyOfficeFragmentDirections
 import com.example.mynailproject.R
 import com.example.mynailproject.adapter.TimeAdapter
 import com.example.mynailproject.database.DBCall
@@ -51,23 +54,31 @@ class RecordBookingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Выберите дату и время"
 
         //val calendar = view.findViewById<CalendarView>(R.id.calendarView)
         //Log.d("TIME", calendar.date.toInt().toString())
 
         val ps = view.findViewById<TextView>(R.id.ps)
-        var text = "Длительность услуги "+time+" часа"
-        if (time == 1) text = "Длительность услуги "+time+" час"
+        var text = "Выбирая время и дату, учитывайте, что длительность услуги "+time+" часа"
+        if (time == 1) text = "Выбирая время и дату, учитывайте, что длительность услуги "+time+" час"
         ps.text = text
 
-        /*val sdf = SimpleDateFormat("dd,MM,yyyy")
-        date = sdf.format(Date(calendar.date))
-        calendar.setOnDateChangeListener(CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
-            var d: String = dayOfMonth.toString()
-            if (d.length < 2) d = "0$d"
-            date = d + "," + (month + 1).toString() + "," + year.toString()
-            addUserEventListener(database)
-        })*/
+        val save = view.findViewById<Button>(R.id.save)
+        val new_work: Button = view.findViewById(R.id.button_new_work)
+        new_work.visibility = View.GONE
+
+        if (time==0 && serv==0){
+            ps.visibility = View.INVISIBLE
+            new_work.visibility = View.VISIBLE
+            save.visibility = View.GONE
+
+        }
+
+        new_work.setOnClickListener {
+            view.findNavController().navigate(R.id.action_global_bookingFragment)
+        }
 
         val button_calendar: ImageButton = view.findViewById(R.id.button_record_calendar)
         val data_view: TextView = view.findViewById(R.id.data_record)
@@ -91,7 +102,7 @@ class RecordBookingFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(this.context)
         recycler.setHasFixedSize(true)
 
-        val save = view.findViewById<Button>(R.id.save)
+
         save.setOnClickListener {
             val color_id = (recycler.adapter as TimeAdapter).getColorPos()
             if (color_id != -1){

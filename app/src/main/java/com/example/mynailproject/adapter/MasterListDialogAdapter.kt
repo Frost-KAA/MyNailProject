@@ -19,41 +19,79 @@ import com.example.mynailproject.Record.RecordServiceFragmentDirections
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.Master
 import com.example.mynailproject.database.ServiceType
+import java.lang.reflect.Type
+import kotlin.properties.Delegates
 
-class MasterListDialogAdapter(val context: Context, val list: List<Master>, val clicked_list: ArrayList<String>): RecyclerView.Adapter<MasterListDialogAdapter.ViewHolder>() {
+class MasterListDialogAdapter(val context: Context, val list_mast: List<Master>, val list_serv: List<ServiceType>, val clicked_list: ArrayList<String>): RecyclerView.Adapter<MasterListDialogAdapter.ViewHolder>() {
+
+    var isMaster = list_mast.size != 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_masters_dialog, parent, false)
+
         return ViewHolder(itemView)
     }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount(): Int{
+        Log.d("MAster", isMaster.toString())
+        if (isMaster) return list_mast.size
+        else return  list_serv.size
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val currentItem = list[position]
-
         var isClicked = false
-        for (uid in clicked_list){
-            if (currentItem.uid == uid){
-                isClicked = true
+
+        Log.d("MAster", isMaster.toString())
+
+        if (isMaster){
+
+            val currentItem = list_mast[position]
+            for (uid in clicked_list){
+                if (currentItem.uid == uid){
+                    isClicked = true
+                }
+            }
+
+            val str: String = currentItem.user?.surname+" "+currentItem.user?.name?.substring(0,1)+"."+currentItem.user?.pathronim?.substring(0,1)+"."
+            holder.textView.text = str
+
+            holder.layout.setOnClickListener {
+                if (!isClicked) {
+                    clicked_list.add(currentItem.uid!!)
+                }
+                else {
+                    clicked_list.remove(currentItem.uid)
+                }
+                notifyDataSetChanged()
             }
         }
+        else{
+            Log.d("NOO", list_serv.size.toString())
+            val currentItem = list_serv[position]
+            for (id in clicked_list){
+                if ("00"+currentItem.id == id){
+                    isClicked = true
+                }
+            }
+
+            val str: String = currentItem.name!!
+            holder.textView.text = str
+
+            holder.layout.setOnClickListener {
+                if (!isClicked) {
+                    clicked_list.add("00"+currentItem.id!!)
+                }
+                else {
+                    clicked_list.remove("00"+currentItem.id)
+                }
+                notifyDataSetChanged()
+            }
+        }
+
         if (isClicked) holder.layout.setBackgroundResource(R.color.shrine_pink_200)
         else holder.layout.setBackgroundResource(R.color.white)
 
-        val str: String = currentItem.user?.surname+" "+currentItem.user?.name?.substring(0,1)+"."+currentItem.user?.pathronim?.substring(0,1)+"."
-        holder.textView.text = str
-
-        holder.layout.setOnClickListener {
-            if (!isClicked) {
-                clicked_list.add(currentItem.uid!!)
-            }
-            else {
-                clicked_list.remove(currentItem.uid)
-            }
-            notifyDataSetChanged()
-        }
     }
 
     fun getClickedList(): ArrayList<String>{

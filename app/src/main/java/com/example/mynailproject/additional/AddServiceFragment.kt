@@ -78,7 +78,7 @@ class AddServiceFragment : Fragment() {
         }
 
         button_masters.setOnClickListener {
-            val dialog = context?.let { it1 -> MastersListDialogFragment(it1, masters_clicked_list, this) }
+            val dialog = context?.let { it1 -> MastersListDialogFragment(it1, masters_clicked_list, this, true) }
             dialog!!.show()
         }
 

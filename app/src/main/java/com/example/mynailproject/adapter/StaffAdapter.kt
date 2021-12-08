@@ -87,9 +87,9 @@ class StaffAdapter(val context: Context, val list: List<Master>): RecyclerView.A
 
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.staff_name)
-        val pathronim: TextView = itemView.findViewById(R.id.staff_pathronim)
-        val surname: TextView = itemView.findViewById(R.id.staff_surname)
+        val name: TextView = itemView.findViewById(R.id.u_name)
+        val pathronim: TextView = itemView.findViewById(R.id.u_pathronim)
+        val surname: TextView = itemView.findViewById(R.id.u_surname)
         val image: ImageView = itemView.findViewById(R.id.image_staff)
         val delete: ImageView = itemView.findViewById(R.id.img_delete)
         val img_info: ImageView = itemView.findViewById(R.id.img_info_master)

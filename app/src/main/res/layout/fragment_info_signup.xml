@@ -7,35 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".signin.InfoSignupFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/hello"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="Введите данные о себе"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/shrine_pink_900"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/surname_layout"
+        android:id="@+id/signup_info_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         android:hint="Фамилия"
         app:boxBackgroundColor="@color/design_default_color_background"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/hello">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/surname"
+            android:id="@+id/signup_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPersonName" />
@@ -52,7 +37,7 @@
         app:boxBackgroundColor="@color/design_default_color_background"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/surname_layout">
+        app:layout_constraintTop_toBottomOf="@+id/signup_info_layout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name"
@@ -102,6 +87,26 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/kod_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="10dp"
+        android:hint="Код"
+        app:boxBackgroundColor="@color/design_default_color_background"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/switch_is_master">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/kod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
@@ -120,8 +125,23 @@
         android:id="@+id/button_end_signup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:text="Сохранить"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/kod_layout" />
+
+    <Switch
+        android:id="@+id/switch_is_master"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:text="Я Мастер"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/phone_layout" />

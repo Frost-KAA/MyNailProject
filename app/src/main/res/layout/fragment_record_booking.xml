@@ -20,28 +20,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/hello"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Выберите дату"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/shrine_pink_900"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ps"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:gravity="center"
         android:text="Длительность услуги 2 часа"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -50,21 +35,50 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/data_record" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/data_record_text"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Дата:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/ps" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/data_record"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="Дата"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/data_record_text"
+        app:layout_constraintTop_toBottomOf="@+id/ps" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/time_record_text"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Время:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/shrine_pink_900"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/hello" />
+        app:layout_constraintTop_toBottomOf="@+id/data_record_text" />
 
     <Button
         android:id="@+id/save"
@@ -78,25 +92,36 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_masters"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/save"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/ps"
+        app:layout_constraintTop_toBottomOf="@+id/time_record_text"
         tools:listitem="@layout/card_time" />
 
     <ImageButton
         android:id="@+id/button_record_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="#FFFFFF"
         android:src="@drawable/ic_baseline_date_range_24"
-        app:layout_constraintTop_toBottomOf="@+id/hello"
-        tools:layout_editor_absoluteX="298dp" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toEndOf="@+id/data_record"
+        app:layout_constraintTop_toBottomOf="@+id/ps" />
+
+    <Button
+        android:id="@+id/button_new_work"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Ввести новое время работы"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

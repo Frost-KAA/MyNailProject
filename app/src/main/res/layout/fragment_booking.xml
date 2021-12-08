@@ -26,6 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
         android:gravity="center"
         android:text="Выберите дату"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -67,61 +68,120 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:ems="10"
         android:inputType="date"
+        android:text="12.05.2021"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toEndOf="@+id/start_date2"
+        app:layout_constraintTop_toBottomOf="@+id/hello" />
+
+    <TextView
+        android:id="@+id/start_date2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:inputType="date"
+        android:text="Дата начала:"
+        android:textColor="@color/shrine_pink_900"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/hello" />
+
+    <TextView
+        android:id="@+id/start_date4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:inputType="date"
+        android:text="Время начала:"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/hello3" />
+
+    <TextView
+        android:id="@+id/start_date5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:inputType="date"
+        android:text="Время окончания:"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/start_date4" />
+
+    <TextView
+        android:id="@+id/end_date2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="date"
+        android:text="Дата окончания:"
+        android:textColor="@color/shrine_pink_900"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/start_date2" />
 
     <TextView
         android:id="@+id/start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:ems="10"
         android:inputType="date"
+        android:text="10:00"
+        android:textColor="@color/shrine_pink_900"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/button_time"
+        app:layout_constraintStart_toEndOf="@+id/start_date4"
         app:layout_constraintTop_toBottomOf="@+id/hello3" />
 
     <TextView
         android:id="@+id/end_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:ems="10"
+        android:layout_marginTop="40dp"
         android:inputType="date"
+        android:text="18:00"
+        android:textColor="@color/shrine_pink_900"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/hello3" />
+        app:layout_constraintEnd_toStartOf="@+id/button_time2"
+        app:layout_constraintStart_toEndOf="@+id/start_date5"
+        app:layout_constraintTop_toBottomOf="@+id/start_time" />
 
     <TextView
         android:id="@+id/end_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:ems="10"
         android:inputType="date"
+        android:text="15.05.2021"
+        android:textColor="@color/shrine_pink_900"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toEndOf="@+id/end_date2"
         app:layout_constraintTop_toBottomOf="@+id/start_date" />
 
     <ImageButton
         android:id="@+id/button_calendar"
         android:layout_width="65dp"
         android:layout_height="51dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:background="#FFFFFF"
         android:src="@drawable/ic_baseline_date_range_24"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/hello" />
+        app:layout_constraintTop_toTopOf="@+id/hello" />
 
     <ImageButton
         android:id="@+id/button_time"
         android:layout_width="65dp"
         android:layout_height="51dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:background="#FFFFFF"
         android:src="@drawable/ic_baseline_access_time_24"
@@ -132,11 +192,11 @@
         android:id="@+id/button_time2"
         android:layout_width="65dp"
         android:layout_height="51dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="#FFFFFF"
         android:src="@drawable/ic_baseline_access_time_24"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/hello3" />
+        app:layout_constraintTop_toBottomOf="@+id/start_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,6 +35,8 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: BasicActivity = activity as BasicActivity
+        activity.supportActionBar?.title = "Регистрация"
 
         auth = Firebase.auth
 
@@ -66,7 +68,7 @@ class SignupFragment : Fragment() {
                         this.context, "Вы успешно зарегистрированы",
                         Toast.LENGTH_SHORT
                     ).show()
-                    sendSignInLink(email, buildActionCodeSettings())
+                    //sendSignInLink(email, buildActionCodeSettings())
                     val user = auth.currentUser
                     updateUI(user, view)
                 } else {
@@ -88,10 +90,10 @@ class SignupFragment : Fragment() {
         }
         else{
             Log.d("Update", "user")
-            val dialog = VerifyEmaillDialogFragment()
+            //val dialog = VerifyEmaillDialogFragment()
             val activity = view.context as BasicActivity
             val manager = activity.supportFragmentManager
-            dialog.show(manager, "info")
+            //dialog.show(manager, "info")
             view.findNavController().navigate(R.id.action_global_infoSignupFragment)
         }
     }
