@@ -65,9 +65,11 @@ class MyOfficeFragment : Fragment() {
 
         val master_crown: LinearLayout = view.findViewById(R.id.layout_master)
         val see_work: Button = view.findViewById(R.id.button_work)
+        val to_client: Button = view.findViewById(R.id.button_to_client)
 
         val role = DBCall.CurrentRole.getRole()
         if (role == null || role == "client"){
+            to_client.visibility = View.GONE
             master_crown.visibility = View.GONE
             see_work.visibility = View.GONE
         }
@@ -94,12 +96,19 @@ class MyOfficeFragment : Fragment() {
         //просмотр истории записей
         val history: ImageButton = view.findViewById(R.id.button_record_history)
         history.setOnClickListener {
-            view.findNavController().navigate(R.id.action_myOfficeFragment_to_historyFragment)
+            val action =MyOfficeFragmentDirections.actionMyOfficeFragmentToHistoryFragment(false, true)
+            view.findNavController().navigate(action)
+        }
+
+
+        to_client.setOnClickListener {
+            val action =MyOfficeFragmentDirections.actionMyOfficeFragmentToHistoryFragment(true, false)
+            view.findNavController().navigate(action)
         }
 
         //подключение адаптера
         recycler_now =  view.findViewById(R.id.recycler_view_now)
-        recycler_now.adapter = this.context?.let { DateAdapter(it, list_now) }
+        recycler_now.adapter = this.context?.let { DateAdapter(it, list_now, false, this) }
         recycler_now.layoutManager = LinearLayoutManager(this.context)
         recycler_now.setHasFixedSize(true)
     }

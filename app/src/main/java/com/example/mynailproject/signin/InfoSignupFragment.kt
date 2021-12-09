@@ -95,7 +95,7 @@ class InfoSignupFragment : Fragment() {
                 ).show()
             }
             else{
-                if (phone_text.length != 11){
+                if (phone_text.length != 12){
                     Toast.makeText(
                         this.context, "Некорректный номер телефона",
                         Toast.LENGTH_SHORT

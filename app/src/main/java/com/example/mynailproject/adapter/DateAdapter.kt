@@ -1,13 +1,18 @@
 package com.example.mynailproject.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
@@ -24,7 +29,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerView.Adapter<DateAdapter.ViewHolder>() {
+
+class DateAdapter(val context: Context, val list: List<ServiceDate>, val isMaster: Boolean, val fr: Fragment): RecyclerView.Adapter<DateAdapter.ViewHolder>() {
 
     private var database: DatabaseReference = Firebase.database.reference
     private val viewBinderHelper = ViewBinderHelper()
@@ -52,6 +58,9 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerVi
 
         viewBinderHelper.bind(holder.layout, currentItem.date)
         viewBinderHelper.closeLayout(currentItem.date)
+
+        if (isMaster) holder.textview.text = "Клиент:"
+
         holder.date_name.text = convertLongToDate(currentItem.date!!.toLong())
         holder.time_name.text = currentItem.hour.toString()+":00"
 
@@ -74,7 +83,22 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerVi
         // удаление записи
         holder.delete.setOnClickListener {
             val db_call = DBCall()
-            db_call.deleteServDate(currentItem.date, currentItem.master_uid!!, currentItem.hour!!, current?.time!!)
+            db_call.deleteServDate(
+                currentItem.date,
+                currentItem.master_uid!!,
+                currentItem.hour!!,
+                current?.time!!
+            )
+        }
+
+        //переход в вотсап
+        holder.whatsapp.setOnClickListener {
+            Log.d("Whats", "whats")
+            val num: String = current?.phone!!
+            val url = "https://api.whatsapp.com/send?phone=$num"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            fr.activity?.startActivity(i)
         }
 
     }
@@ -92,6 +116,8 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerVi
         val time: TextView = itemView.findViewById(R.id.details_time)
         val service: TextView = itemView.findViewById(R.id.details_service)
         val price: TextView = itemView.findViewById(R.id.details_price)
+        val textview: TextView = itemView.findViewById(R.id.details_info_text)
+        val whatsapp: Button = itemView.findViewById(R.id.button_to_whatsapp)
 
 
     }
@@ -107,10 +133,22 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>): RecyclerVi
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (data_list.size != 0)data_list.clear()
                 for (item in list){
-                    Log.d("LIISt", item.toString())
+                    //Log.d("LIISt", item.toString())
                     val serv = dataSnapshot.child("service_type").child(item.serv_id!!).getValue<ServiceType>()
-                    val mast = dataSnapshot.child("masters").child(item.master_uid!!).child("user").getValue<User>()
-                    val detail = ServiceDateCard(item.hour, item.date, false, serv?.name, serv?.price, serv?.time, mast?.surname+" "+mast?.name?.substring(0,1)+"."+mast?.pathronim?.substring(0,1)+".")
+                    val mast = dataSnapshot.child("users").child(item.master_uid!!).getValue<User>()
+                    val detail = ServiceDateCard(
+                        item.hour,
+                        item.date,
+                        false,
+                        serv?.name,
+                        serv?.price,
+                        serv?.time,
+                        mast?.surname + " " + mast?.name?.substring(
+                            0,
+                            1
+                        ) + "." + mast?.pathronim?.substring(0, 1) + ".",
+                        mast?.phone
+                    )
                     data_list.add(detail)
                 }
                 notifyDataSetChanged()

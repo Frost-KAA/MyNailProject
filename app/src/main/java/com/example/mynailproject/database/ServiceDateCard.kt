@@ -10,5 +10,6 @@ data class ServiceDateCard(
     val serv: String? = null,
     val price: Int? = null,
     val time: Int? = null,
-    val master: String? = null
+    val master: String? = null,
+    val phone: String? = null
 )

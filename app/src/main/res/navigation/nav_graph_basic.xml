@@ -171,7 +171,12 @@
         android:name="com.example.mynailproject.additional.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" >
-        <argument android:name="history_list" />
+        <argument
+            android:name="isMaster"
+            app:argType="boolean" />
+        <argument
+            android:name="isHistory"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/infoSignupMasterFragment"
