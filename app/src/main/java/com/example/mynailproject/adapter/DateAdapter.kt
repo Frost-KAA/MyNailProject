@@ -93,7 +93,6 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>, val isMaste
 
         //переход в вотсап
         holder.whatsapp.setOnClickListener {
-            Log.d("Whats", "whats")
             val num: String = current?.phone!!
             val url = "https://api.whatsapp.com/send?phone=$num"
             val i = Intent(Intent.ACTION_VIEW)

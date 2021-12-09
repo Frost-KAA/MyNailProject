@@ -56,7 +56,6 @@ class NotificationService(): Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("Service", "Started")
         val notificationId: Int = 101
         val channelId = "channel-id"
         val channelName = "Channel Name"
