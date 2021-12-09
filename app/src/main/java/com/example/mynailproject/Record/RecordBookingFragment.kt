@@ -12,8 +12,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynailproject.BasicActivity
-import com.example.mynailproject.MyOfficeFragmentDirections
+import com.example.mynailproject.active.BasicActivity
 import com.example.mynailproject.R
 import com.example.mynailproject.adapter.TimeAdapter
 import com.example.mynailproject.database.DBCall

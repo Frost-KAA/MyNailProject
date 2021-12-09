@@ -8,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynailproject.BasicActivity
+import com.example.mynailproject.active.BasicActivity
 import com.example.mynailproject.R
 import com.example.mynailproject.adapter.RecordStaffAdapter
-import com.example.mynailproject.adapter.StaffAdapter
-import com.example.mynailproject.additional.AddServiceFragmentArgs
 import com.example.mynailproject.database.Master
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

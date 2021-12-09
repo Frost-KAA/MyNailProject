@@ -1,4 +1,4 @@
-package com.example.mynailproject
+package com.example.mynailproject.active
 
 import android.os.Bundle
 import android.util.Log
@@ -6,15 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynailproject.adapter.PriceAdapter
+import com.example.mynailproject.R
 import com.example.mynailproject.adapter.StaffAdapter
 import com.example.mynailproject.database.Master
-import com.example.mynailproject.database.ServiceType
-import com.example.mynailproject.database.User
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

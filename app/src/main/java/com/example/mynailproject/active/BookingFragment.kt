@@ -1,20 +1,15 @@
-package com.example.mynailproject
+package com.example.mynailproject.active
 
 import android.app.TimePickerDialog
-import android.content.res.Resources
-import android.graphics.BitmapRegionDecoder.newInstance
-import android.net.wifi.p2p.nsd.WifiP2pUpnpServiceInfo.newInstance
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.mynailproject.R
 import com.example.mynailproject.database.DBCall
-import com.google.android.material.datepicker.MaterialCalendar.newInstance
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.lang.reflect.Array.newInstance
 import java.text.SimpleDateFormat
 import java.util.*
 

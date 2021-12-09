@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.chauthai.swipereveallayout.ViewBinderHelper
-import com.example.mynailproject.PriceFragmentDirections
+import com.example.mynailproject.active.PriceFragmentDirections
 import com.example.mynailproject.R
 import com.example.mynailproject.Record.RecordServiceFragmentDirections
 import com.example.mynailproject.database.DBCall

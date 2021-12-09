@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.mynailproject.HomeFragment"
+        android:name="com.example.mynailproject.active.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/bookingFragment"
-        android:name="com.example.mynailproject.BookingFragment"
+        android:name="com.example.mynailproject.active.BookingFragment"
         android:label="fragment_booking"
         tools:layout="@layout/fragment_booking" />
     <fragment
         android:id="@+id/priceFragment"
-        android:name="com.example.mynailproject.PriceFragment"
+        android:name="com.example.mynailproject.active.PriceFragment"
         android:label="fragment_price"
         tools:layout="@layout/fragment_price" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/staffFragment"
-        android:name="com.example.mynailproject.StaffFragment"
+        android:name="com.example.mynailproject.active.StaffFragment"
         android:label="fragment_staff"
         tools:layout="@layout/fragment_staff" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/myOfficeFragment"
-        android:name="com.example.mynailproject.MyOfficeFragment"
+        android:name="com.example.mynailproject.active.MyOfficeFragment"
         android:label="fragment_my_office"
         tools:layout="@layout/fragment_my_office" >
         <action

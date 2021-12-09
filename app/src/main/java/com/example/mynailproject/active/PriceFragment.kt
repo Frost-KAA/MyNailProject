@@ -1,4 +1,4 @@
-package com.example.mynailproject
+package com.example.mynailproject.active
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mynailproject.active.PriceFragmentDirections
+import com.example.mynailproject.R
 import com.example.mynailproject.adapter.PriceAdapter
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.ServiceType
@@ -57,7 +59,7 @@ class PriceFragment : Fragment() {
         }
 
         add_b.setOnClickListener {
-            val action = PriceFragmentDirections.actionPriceFragmentToAddServiceFragment((list[list.size - 1].id!!)+1, true)
+            val action = PriceFragmentDirections.actionPriceFragmentToAddServiceFragment((list[list.size - 1].id!!) + 1, true)
             view.findNavController().navigate(action)
         }
     }
@@ -69,7 +71,6 @@ class PriceFragment : Fragment() {
                   for (ds in dataSnapshot.child("service_type").children){
                       val serv: ServiceType? = ds.getValue<ServiceType>()
                       if (serv != null) {
-                          Log.d("SERV", serv.name.toString())
                           list.add(serv)
                       }
                   }
@@ -77,7 +78,6 @@ class PriceFragment : Fragment() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
             }
         }

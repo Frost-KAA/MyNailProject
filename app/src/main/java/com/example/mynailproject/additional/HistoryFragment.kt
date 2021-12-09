@@ -10,18 +10,12 @@ import android.widget.Button
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynailproject.BasicActivity
-import com.example.mynailproject.MyOfficeFragmentDirections
-import com.example.mynailproject.PriceFragmentDirections
+import com.example.mynailproject.active.BasicActivity
+import com.example.mynailproject.active.MyOfficeFragmentDirections
 import com.example.mynailproject.R
-import com.example.mynailproject.Record.RecordBookingFragmentArgs
-import com.example.mynailproject.Record.RecordStaffFragmentArgs
 import com.example.mynailproject.adapter.DateAdapter
-import com.example.mynailproject.adapter.PriceAdapter
-import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.ServiceDate
 import com.example.mynailproject.database.User
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -133,7 +127,7 @@ class HistoryFragment : Fragment() {
                                 val d: ServiceDate? = ds.getValue<ServiceDate>()
                                 if (d != null && d.master_uid == current_user?.uid) {
                                     if ((!isHistory && d.date!! > now.toString()) || (isHistory && d.date!! <= now.toString())) {
-                                        val new_d = ServiceDate(d.hour, d.serv_id, k!!, d.date)
+                                        val new_d = ServiceDate(d.hour, d.serv_id, k!!, d.date, false)
                                         Log.d("HISTORY 1 ", list_history.size.toString())
                                         list_history.add(new_d)
                                     }

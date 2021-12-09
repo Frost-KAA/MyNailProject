@@ -1,14 +1,10 @@
-package com.example.mynailproject
+package com.example.mynailproject.active
 
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View.OnTouchListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuView
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.mynailproject.database.DBCall
+import com.example.mynailproject.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

@@ -10,12 +10,11 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.example.mynailproject.BasicActivity
+import com.example.mynailproject.active.BasicActivity
 import com.example.mynailproject.R
 import com.example.mynailproject.additional.MastersListDialogFragment
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.Master
-import com.example.mynailproject.database.ServiceType
 import com.example.mynailproject.database.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

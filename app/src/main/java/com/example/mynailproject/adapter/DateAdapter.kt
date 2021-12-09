@@ -136,19 +136,9 @@ class DateAdapter(val context: Context, val list: List<ServiceDate>, val isMaste
                     //Log.d("LIISt", item.toString())
                     val serv = dataSnapshot.child("service_type").child(item.serv_id!!).getValue<ServiceType>()
                     val mast = dataSnapshot.child("users").child(item.master_uid!!).getValue<User>()
-                    val detail = ServiceDateCard(
-                        item.hour,
-                        item.date,
-                        false,
-                        serv?.name,
-                        serv?.price,
-                        serv?.time,
-                        mast?.surname + " " + mast?.name?.substring(
-                            0,
-                            1
-                        ) + "." + mast?.pathronim?.substring(0, 1) + ".",
-                        mast?.phone
-                    )
+                    val detail = ServiceDateCard(item.hour, item.date, false, serv?.name, serv?.price, serv?.time,
+                        mast?.surname + " " + mast?.name?.substring(0, 1) + "." + mast?.pathronim?.substring(0, 1) + ".",
+                        mast?.phone)
                     data_list.add(detail)
                 }
                 notifyDataSetChanged()

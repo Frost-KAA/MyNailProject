@@ -6,7 +6,7 @@
     app:startDestination="@id/MainFragment">
     <fragment
         android:id="@+id/MainFragment"
-        android:name="com.example.mynailproject.MainFragment"
+        android:name="com.example.mynailproject.active.MainFragment"
         android:label="fragment_enter"
         tools:layout="@layout/fragment_main">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <activity
         android:id="@+id/basicActivity"
-        android:name="com.example.mynailproject.BasicActivity"
+        android:name="com.example.mynailproject.active.BasicActivity"
         android:label="activity_basic"
         tools:layout="@layout/activity_basic"></activity>
     <fragment

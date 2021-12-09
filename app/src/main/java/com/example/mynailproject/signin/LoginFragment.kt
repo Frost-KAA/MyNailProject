@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.example.mynailproject.BasicActivity
+import com.example.mynailproject.active.BasicActivity
 import com.example.mynailproject.R
 import com.example.mynailproject.database.DBCall
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -86,23 +86,18 @@ class LoginFragment : Fragment() {
                     .requestEmail()
                     .build()
             googleSignInClient = GoogleSignIn.getClient(view.context, gso)
-
             val signInIntent = googleSignInClient.signInIntent
-            Log.d("Intent", signInIntent.toString())
             startActivityForResult(signInIntent, 9001)
         }
     }
 
+    //вход через почту и пароль
     private fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user, true)
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.d("TAG", "signInWithEmail:failure", task.exception)
                     Toast.makeText(this.context, "Ошибка входа",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null, true)

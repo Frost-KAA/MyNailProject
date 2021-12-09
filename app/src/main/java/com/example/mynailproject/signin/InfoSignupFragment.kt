@@ -11,7 +11,7 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.example.mynailproject.BasicActivity
+import com.example.mynailproject.active.BasicActivity
 import com.example.mynailproject.R
 import com.example.mynailproject.database.DBCall
 import com.example.mynailproject.database.User
@@ -31,6 +31,7 @@ class InfoSignupFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private var database: DatabaseReference = Firebase.database.reference
+    val CODE_MASTER: String = "cat"
 
     lateinit var surname : TextView
     lateinit var name : TextView
@@ -103,7 +104,7 @@ class InfoSignupFragment : Fragment() {
 
                 } else{
 
-                    if (isCheckedMaster && kod.text.toString() != "cat"){
+                    if (isCheckedMaster && kod.text.toString() != CODE_MASTER){
                         Toast.makeText(this.context, "Неверный код для регистрации мастера",
                             Toast.LENGTH_SHORT).show()
                     }

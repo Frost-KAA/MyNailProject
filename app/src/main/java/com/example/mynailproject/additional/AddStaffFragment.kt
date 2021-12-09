@@ -99,7 +99,6 @@ class AddStaffFragment : Fragment() {
                     Toast.makeText(this.context, "Ошибка",
                         Toast.LENGTH_SHORT).show()
                 }.addOnSuccessListener { taskSnapshot ->
-                    Log.d("STAFF", "Success")
                     Toast.makeText(this.context, "Фото загружено",
                         Toast.LENGTH_SHORT).show()
                 }

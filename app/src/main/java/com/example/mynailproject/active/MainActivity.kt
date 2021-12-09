@@ -1,9 +1,8 @@
-package com.example.mynailproject
+package com.example.mynailproject.active
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import com.example.mynailproject.R
 
 class MainActivity : AppCompatActivity() {
 

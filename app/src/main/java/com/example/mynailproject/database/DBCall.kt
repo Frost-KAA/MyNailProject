@@ -24,7 +24,6 @@ class DBCall {
 
     object CurrentRole{
         private var current_role : String? = null
-
         fun setRole(){
             val t = Thread {
                 val auth = Firebase.auth
@@ -35,7 +34,6 @@ class DBCall {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             current_role = dataSnapshot.child("users").child(current_user.uid)
                                 .getValue<User>()?.role
-                            Log.d("CURR0", current_role.toString())
                         }
 
                         override fun onCancelled(databaseError: DatabaseError) {
@@ -48,8 +46,6 @@ class DBCall {
             }
             t.start()
             t.join()
-            Log.d("CURR", current_role.toString())
-
         }
 
         fun getRole(): String?{
@@ -99,7 +95,7 @@ class DBCall {
             i++
         }
 
-        val d = ServiceDate(hour, "00"+serv.toString(), uid, date)
+        val d = ServiceDate(hour, "00"+serv.toString(), uid, date, false)
         database.child("users").child(current_user?.uid!!).child("date").child(date).setValue(d)
     }
 
@@ -125,6 +121,10 @@ class DBCall {
             date += 24*60*60*1000
 
         }
+    }
+
+    fun isNotificated(date: String){
+        database.child("users").child(current_user?.uid!!).child("date").child(date).child("notificat").setValue(true)
     }
 
 

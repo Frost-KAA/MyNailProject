@@ -1,4 +1,4 @@
-package com.example.mynailproject
+package com.example.mynailproject.active
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.mynailproject.R
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

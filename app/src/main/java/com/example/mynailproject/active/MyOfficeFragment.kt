@@ -1,5 +1,8 @@
-package com.example.mynailproject
+package com.example.mynailproject.active
 
+import android.app.ActivityManager
+import android.content.Context.ACTIVITY_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,13 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynailproject.Record.RecordStaffFragmentDirections
+import com.example.mynailproject.active.MyOfficeFragmentDirections
+import com.example.mynailproject.R
 import com.example.mynailproject.adapter.DateAdapter
-import com.example.mynailproject.adapter.StaffAdapter
+import com.example.mynailproject.additional.NotificationService
 import com.example.mynailproject.database.*
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -24,7 +31,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -41,6 +47,7 @@ class MyOfficeFragment : Fragment() {
     lateinit var name : TextView
     lateinit var pathronim: TextView
     var current_user: FirebaseUser? = null
+    var isMaster : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +79,10 @@ class MyOfficeFragment : Fragment() {
             to_client.visibility = View.GONE
             master_crown.visibility = View.GONE
             see_work.visibility = View.GONE
+            isMaster = false
         }
+        else isMaster = true
+
 
         // Выход из аккаунта
         val exit: ImageView = view.findViewById(R.id.img_exit)
@@ -89,20 +99,40 @@ class MyOfficeFragment : Fragment() {
 
         // просомтр времени работы для мастера
         see_work.setOnClickListener{
-            val action =MyOfficeFragmentDirections.actionMyOfficeFragmentToRecordBookingFragment(current_user?.uid, 0, 0)
+            val action = MyOfficeFragmentDirections.actionMyOfficeFragmentToRecordBookingFragment(current_user?.uid, 0, 0)
             view.findNavController().navigate(action)
         }
 
         //просмотр истории записей
         val history: ImageButton = view.findViewById(R.id.button_record_history)
         history.setOnClickListener {
-            val action =MyOfficeFragmentDirections.actionMyOfficeFragmentToHistoryFragment(false, true)
+            val action = MyOfficeFragmentDirections.actionMyOfficeFragmentToHistoryFragment(false, true)
             view.findNavController().navigate(action)
+        }
+
+        val notif: SwitchMaterial = view.findViewById(R.id.switch_notif)
+        notif.setOnCheckedChangeListener { buttonView, isChecked ->
+            val intent = Intent(activity.applicationContext, NotificationService::class.java)
+            if (isChecked){
+                if (!isServiceRunning(NotificationService::class.java)) {
+                    activity.startService(intent)
+                    Log.d("START", "START")
+                } else {
+                    Toast.makeText(context, "The service has already started", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                if (isServiceRunning(NotificationService::class.java)) {
+                    activity.stopService(intent)
+                } else {
+                    Toast.makeText(context, "The service has already stopped", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
 
         to_client.setOnClickListener {
-            val action =MyOfficeFragmentDirections.actionMyOfficeFragmentToHistoryFragment(true, false)
+            val action = MyOfficeFragmentDirections.actionMyOfficeFragmentToHistoryFragment(true, false)
             view.findNavController().navigate(action)
         }
 
@@ -145,5 +175,15 @@ class MyOfficeFragment : Fragment() {
             }
         }
         userReference.addValueEventListener(userListener)
+    }
+
+    private fun isServiceRunning(serviceClass: Class<*>): Boolean {
+        val activityManager = activity?.getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        for (service in activityManager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
 }
